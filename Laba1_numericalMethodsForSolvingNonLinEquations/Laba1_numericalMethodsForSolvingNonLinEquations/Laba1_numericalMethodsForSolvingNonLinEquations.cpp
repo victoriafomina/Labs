@@ -3,65 +3,74 @@
 
 using namespace std;
 
-// 12 вариант
+// 14 вариант
 
-void separationOfRoots();
+void separationOfRoots(double leftFrontier, double rightFrontier);
 double function(double point);
 double derivativeOfAFunction(double point);
-void separationOfRoots();
 void bisection(double leftFrontier, double rightFrontier, double eps);
 void newtonsMethod(double leftFrontier, double rightFrontier, double eps);
 void modifiedNewtonsMethod(double leftFrontier, double rightFrontier, double const eps);
+void secantMethod(double leftFrontier, double rightFrontier, double const eps);
+void printResultOfSolvingEquation(int stepsToGetApproximateSolution, double approximateSolution);
 
 int main()
 {
     setlocale(LC_ALL, "Russian");
     cout << "ЧИСЛЕННЫЕ МЕТОДЫ РЕШЕНИЯ НЕЛИНЕЙНЫХ УРАВНЕНИЙ\n" << endl;
 
-    separationOfRoots();
+    int number = 0;
+    cout << "Введите 0, если не хотите менять границы отрезка" << endl;
+    cout << "Введите 1, если хотите изменить границы отрезка" << endl;
+    
+    cin >> number;
 
+    double leftFrontier = -1;
+    double rightFrontier = 3;
+
+    if (number == 1)
+    {
+        cout << "Введите левую границу отрезка: ";
+        cin >> leftFrontier;
+        cout << "Введите правую границу отрезка: ";
+        cin >> rightFrontier;
+    }
+
+    separationOfRoots(leftFrontier, rightFrontier);
 
     return 0;
 }
 
 /// <summary>
-/// Вычисляет значение функции 2^{-x} + 0,5∙x^2 ‒ 10 в точке.
+/// Вычисляет значение функции 2^{-x} + 0,5∙x^2 ‒ 10 в точке x.
 /// </summary>
-double function(double point)
+double function(double x)
 {
-    return pow(2, -point) + 0.5 * point * point - 10;
+    return (x - 1) * (x - 1) - exp(-x);
 }
 
 /// <summary>
-/// Вычисляет значение производной функции 2^{-x} + 0,5∙x^2 ‒ 10 в точке.
+/// Вычисляет значение производной функции 2^{-x} + 0,5∙x^2 ‒ 10 в точке x.
 /// </summary>
-double derivativeOfAFunction(double point)
+double derivativeOfAFunction(double x)
 {
-    return -pow(2, -point) + log(2) + 2 * point;
+    return 2 * (x - 1) + exp(-x);
 }
 
 /// <summary>
 /// Процедура отделения корней.
 /// </summary>
-void separationOfRoots()
+void separationOfRoots(double leftFrontier, double rightFrontier)
 {
-    double leftFrontier = 0;
-    double rightFrontier = 0;
-
-    cout << "Введите левую границу отрезка: ";
-    cin >> leftFrontier;
-
-    cout << "Введите правую границу отрезка: ";
-    cin >> rightFrontier;
-
     int numberOfParts = 0;
     cout << "Введите на сколько частей будет разбит отрезок: ";
     cin >> numberOfParts;
+    cout << endl;
 
     double step = static_cast<double>(leftFrontier + rightFrontier) / numberOfParts;
 
     double currentLeftPoint = leftFrontier;
-    double currentRightPoint = rightFrontier;
+    double currentRightPoint = leftFrontier + step;
     double currentLeftPointValue = function(currentLeftPoint);
     int countSignChangeIntervals = 0;
 
@@ -74,8 +83,11 @@ void separationOfRoots()
             ++countSignChangeIntervals;
             cout << "[" << currentLeftPoint << ", " << currentRightPoint << "]" << endl;
 
-            double const eps = pow(10, -8);
+            double const eps = pow(10, -1); // 10 -8 nnnada
             bisection(currentLeftPoint, currentRightPoint, eps);
+            newtonsMethod(currentLeftPoint, currentRightPoint, eps);
+            modifiedNewtonsMethod(currentLeftPoint, currentRightPoint, eps);
+            secantMethod(currentLeftPoint, currentRightPoint, eps);
         }
 
         currentLeftPoint = currentRightPoint;
@@ -91,7 +103,9 @@ void separationOfRoots()
 /// </summary>
 void bisection(double leftFrontier, double rightFrontier, double const eps)
 {
-    cout << "Метод половинного деления\n" << endl;
+    cout << "Метод половинного деления" << endl;
+
+    int countStepsToGetApproximateSolution = 0;
 
     do
     {
@@ -105,12 +119,14 @@ void bisection(double leftFrontier, double rightFrontier, double const eps)
         {
             leftFrontier = midpoint;
         }
+
+        ++countStepsToGetApproximateSolution;
     } 
     while (rightFrontier - leftFrontier > 2 * eps);
 
     double approximateSolution = (leftFrontier + rightFrontier) / 2;
 
-    cout << "Модуль невязки: " << abs(function(approximateSolution)) << endl;
+    printResultOfSolvingEquation(countStepsToGetApproximateSolution, approximateSolution);
 }
 
 /// <summary>
@@ -118,7 +134,7 @@ void bisection(double leftFrontier, double rightFrontier, double const eps)
 /// </summary>
 void newtonsMethod(double leftFrontier, double rightFrontier, double const eps)
 {
-    cout << "Метод Ньютона (метод касательных)\n" << endl;
+    cout << "Метод Ньютона (метод касательных)" << endl;
 
     double nthPoint = (leftFrontier + rightFrontier) / 2;
 
@@ -130,10 +146,7 @@ void newtonsMethod(double leftFrontier, double rightFrontier, double const eps)
         ++countStepsToGetApproximateSolution;
     }
 
-    cout << "Количество шагов, потребовавшееся для нахождения приближенного решения: " <<
-            countStepsToGetApproximateSolution << endl;
-    cout << "Приближенное решение: " << function(nthPoint) << endl;
-    cout << "Модуль невязки: " << abs(function(nthPoint)) << endl;
+    printResultOfSolvingEquation(countStepsToGetApproximateSolution, nthPoint);
 }
 
 /// <summary>
@@ -141,7 +154,7 @@ void newtonsMethod(double leftFrontier, double rightFrontier, double const eps)
 /// </summary>
 void modifiedNewtonsMethod(double leftFrontier, double rightFrontier, double const eps)
 {
-    cout << "Модифицированный метод Ньютона\n" << endl;
+    cout << "Модифицированный метод Ньютона" << endl;
 
     double firstPoint = (leftFrontier + rightFrontier) / 2;
     double nthPoint = firstPoint;
@@ -154,10 +167,7 @@ void modifiedNewtonsMethod(double leftFrontier, double rightFrontier, double con
         ++countStepsToGetApproximateSolution;
     }
 
-    cout << "Количество шагов, потребовавшееся для нахождения приближенного решения: " <<
-        countStepsToGetApproximateSolution << endl;
-    cout << "Приближенное решение: " << function(nthPoint) << endl;
-    cout << "Модуль невязки: " << abs(function(nthPoint)) << endl;
+    printResultOfSolvingEquation(countStepsToGetApproximateSolution, nthPoint);
 }
 
 /// <summary>
@@ -165,17 +175,33 @@ void modifiedNewtonsMethod(double leftFrontier, double rightFrontier, double con
 /// </summary>
 void secantMethod(double leftFrontier, double rightFrontier, double const eps)
 {
-    cout << "Метод секущих\n" << endl;
+    cout << "Метод секущих" << endl;
 
-    // Два предыдущих, откуда?
-    double prePreviousPoint = (leftFrontier + rightFrontier) / 2;
-    double previousPoint = (leftFrontier + rightFrontier) / 2;
-    double currentPoint = 0;
+    double previousPoint = leftFrontier;
+    double currentPoint = rightFrontier;
+    double nextPoint = 0;
 
-    while (abs(function(previousPoint)) > eps)
+    int countStepsToGetApproximateSolution = 0;
+
+    while (abs(function(currentPoint)) > eps)
     {
-        currentPoint = previousPoint - function(previousPoint) /
-                (function(previousPoint) - function(prePreviousPoint)) * (previousPoint - prePreviousPoint);
+        nextPoint = currentPoint - function(currentPoint) /
+                (function(currentPoint) - function(previousPoint)) * (currentPoint - previousPoint);
+        previousPoint = currentPoint;
+        currentPoint = nextPoint;
+        ++countStepsToGetApproximateSolution;
     }
 
+    printResultOfSolvingEquation(countStepsToGetApproximateSolution, currentPoint);
+}
+
+/// <summary>
+/// Выводит на консоль результат решения уравнения.
+/// </summary>
+void printResultOfSolvingEquation(int stepsToGetApproximateSolution, double approximateSolution)
+{
+    cout << "Количество шагов, потребовавшееся для нахождения приближенного решения: " <<
+        stepsToGetApproximateSolution << endl;
+    cout << "Приближенное решение: " << approximateSolution << endl;
+    cout << "Модуль невязки: " << abs(function(approximateSolution)) << endl << endl;
 }
