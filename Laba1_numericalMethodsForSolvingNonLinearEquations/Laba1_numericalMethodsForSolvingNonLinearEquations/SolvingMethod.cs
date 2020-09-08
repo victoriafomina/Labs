@@ -100,7 +100,7 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
 
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(methodName);
-            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine($"Начальное приближение к корню: {firstApproximation}");
             Console.WriteLine($"Приближенное решение уравнения: {ApproximateResult}");
             Console.WriteLine($"Количество шагов, потребовавшееся для получения приближенного решения уравнения" +
