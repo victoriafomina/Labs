@@ -98,7 +98,9 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
                 isCalculated = true;
             }
 
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(methodName);
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"Начальное приближение к корню: {firstApproximation}");
             Console.WriteLine($"Приближенное решение уравнения: {ApproximateResult}");
             Console.WriteLine($"Количество шагов, потребовавшееся для получения приближенного решения уравнения" +
@@ -107,6 +109,7 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
 
             if (this is BisectionMethod)
             {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine($"Длина последнего отрезка: {rightBorder - leftBorder}");
             }
 

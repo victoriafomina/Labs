@@ -13,20 +13,23 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
         public void Run()
         {
             IFunction function = new MyFunction();
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("ЧИСЛЕННЫЕ МЕТОДЫ РЕШЕНИЯ НЕЛИНЕЙНЫХ УРАВНЕНИЙ\n");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(function.ToString());
 
             const double leftBorder = -1;
             const double rightBorder = 3;
             Console.WriteLine($"[{leftBorder}, {rightBorder}]");
 
-            double accuracy = Math.Pow(10, -8);
+            double accuracy = Math.Pow(10, -10);
             Console.WriteLine($"eps = {accuracy}\n");
 
             const int numberOfParts = 1000;
             double step = Math.Abs(rightBorder - leftBorder) / numberOfParts;
 
             Dictionary<int, string> solvingMethods = new Dictionary<int, string>(4);
+            Console.ForegroundColor = ConsoleColor.Green;
             solvingMethods.Add(0, "Метод половинного деления");
             solvingMethods.Add(1, "Метод Ньютона (метод касательных)");
             solvingMethods.Add(2, "Модифицированный метод Ньютона");
@@ -83,6 +86,7 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
 
         private static void PrintInfoAboutMethods()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Введите целое число");
             Console.WriteLine("0 - метод половинного деления");
             Console.WriteLine("1 - метод Ньютона (метод касательных)");
@@ -101,6 +105,7 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
             double currentRightPoint = leftBorder + step;
             double currentLeftPointValue = function.FunctionValue(currentLeftPoint);
             int countSignChangeIntervals = 0;
+            Console.ForegroundColor = ConsoleColor.Cyan;
 
             while (currentRightPoint <= rightBorder)
             {
