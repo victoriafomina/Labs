@@ -79,6 +79,10 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
                         break;
                     case 4:
                         return;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Было введено некорректное значение!\n");
+                        break;
                 }
             }
 

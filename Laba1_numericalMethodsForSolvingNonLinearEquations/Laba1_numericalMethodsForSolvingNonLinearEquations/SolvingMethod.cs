@@ -98,7 +98,7 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
                 isCalculated = true;
             }
 
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(methodName);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine($"Начальное приближение к корню: {firstApproximation}");
