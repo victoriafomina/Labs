@@ -61,8 +61,6 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
 
                 return numberOfStepsToGetResult;
             }
-
-            protected set { } 
         }
 
         /// <returns>Модуль невязки.</returns>
