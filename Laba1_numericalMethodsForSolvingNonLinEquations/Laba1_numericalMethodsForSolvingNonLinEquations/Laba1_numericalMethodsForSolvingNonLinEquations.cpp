@@ -83,7 +83,7 @@ void separationOfRoots(double leftFrontier, double rightFrontier)
             ++countSignChangeIntervals;
             cout << "[" << currentLeftPoint << ", " << currentRightPoint << "]" << endl;
 
-            double const eps = pow(10, -1); // 10 -8 nnnada
+            double const eps = pow(10, -8); // 10 -8 nnnada
             bisection(currentLeftPoint, currentRightPoint, eps);
             newtonsMethod(currentLeftPoint, currentRightPoint, eps);
             modifiedNewtonsMethod(currentLeftPoint, currentRightPoint, eps);
