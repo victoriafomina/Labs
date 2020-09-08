@@ -2,6 +2,9 @@
 
 namespace Laba1_numericalMethodsForSolvingNonLinearEquations
 {
+    /// <summary>
+    /// Абстрактный класс определяет поведение классов-методов решения уравнений.
+    /// </summary>
     public abstract class SolvingMethod
     {
         protected string methodName;
@@ -14,6 +17,7 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
         protected int numberOfStepsToGetResult;
         protected double residualModule;
         protected double approximateResult;
+        protected double firstApproximation;
 
         public SolvingMethod(string methodName, IFunction function, double leftBorder, double rightBorder, double step, 
                 double accuracy)
@@ -39,8 +43,6 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
 
                 return approximateResult;
             }
-
-            protected set { }
         }
 
         /// <returns>
@@ -97,6 +99,7 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
             }
 
             Console.WriteLine(methodName);
+            Console.WriteLine($"Начальное приближение к корню: {firstApproximation}");
             Console.WriteLine($"Приближенное решение уравнения: {ApproximateResult}");
             Console.WriteLine($"Количество шагов, потребовавшееся для получения приближенного решения уравнения" +
                     $" с заданной точностью: {NumberOfStepsToGetResult}");

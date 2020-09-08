@@ -2,6 +2,9 @@
 
 namespace Laba1_numericalMethodsForSolvingNonLinearEquations
 {
+    /// <summary>
+    /// Класс позволяет решить нелинейное уравнение модифицированным методом Ньютона.
+    /// </summary>
     public sealed class ModifiedNewtonsMethod : SolvingMethod
     {
         public ModifiedNewtonsMethod(string methodName, IFunction function, double leftBorder, double rightBorder,
@@ -11,8 +14,9 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
 
         protected override void Solve()
         {
-            double firstPoint = (leftBorder + rightBorder) / 2;
+            double firstPoint = leftBorder;
             double nthPoint = firstPoint;
+            firstApproximation = firstPoint;
 
             int countStepsToGetApproximateSolution = 0;
 

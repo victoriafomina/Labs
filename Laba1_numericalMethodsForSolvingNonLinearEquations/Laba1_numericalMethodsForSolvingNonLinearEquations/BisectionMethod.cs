@@ -2,6 +2,9 @@
 
 namespace Laba1_numericalMethodsForSolvingNonLinearEquations
 {
+    /// <summary>
+    /// Класс позволяет решить нелинейное уравнение метод половинного деления.
+    /// </summary>
     public sealed class BisectionMethod : SolvingMethod
     {
         public BisectionMethod(string methodName, IFunction function, double leftBorder, double rightBorder,
@@ -10,9 +13,8 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
 
         protected override void Solve()
         {
-            Console.WriteLine(methodName);
-
             int countStepsToGetApproximateSolution = 0;
+            firstApproximation = (leftBorder + rightBorder) / 2;
 
             do
             {

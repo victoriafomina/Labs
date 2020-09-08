@@ -2,6 +2,9 @@
 
 namespace Laba1_numericalMethodsForSolvingNonLinearEquations
 {
+    /// <summary>
+    /// Класс позволяет решить нелинейное уравнение методом Ньютона.
+    /// </summary>
     public sealed class NewtonsMethod : SolvingMethod
     {
         public NewtonsMethod(string methodName, IFunction function, double leftBorder, double rightBorder,
@@ -13,6 +16,7 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
         {
             double nthPoint = leftBorder;
             int countStepsToGetApproximateSolution = 0;
+            firstApproximation = nthPoint;
 
             while (Math.Abs(function.FunctionValue(nthPoint)) > accuracy)
             {

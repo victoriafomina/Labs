@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 namespace Laba1_numericalMethodsForSolvingNonLinearEquations
 {
-
+    /// <summary>
+    /// Класс реализует пользовательский интерфейс, поволяющий решать нелинейные уравнения различными методами.
+    /// </summary>
     public class UserInterface
     {
         private Dictionary<int, (double, double)> signChangeIntervals = new Dictionary<int, (double, double)>();
@@ -89,6 +91,9 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
             Console.WriteLine("4 - выход\n");
         }
 
+        /// <summary>
+        /// Метод разделения корней уравнения.
+        /// </summary>
         private void SeparationOfRoots(double leftBorder, double rightBorder, int numberOfParts, IFunction function)
         {
             double step = (leftBorder + rightBorder) / numberOfParts;
