@@ -1,5 +1,8 @@
 ﻿namespace Laba1_numericalMethodsForSolvingNonLinearEquations
 {
+    /// <summary>
+    /// Интерфейс, определяющий поведение функции.
+    /// </summary>
     public interface IFunction
     {
         /// <summary>

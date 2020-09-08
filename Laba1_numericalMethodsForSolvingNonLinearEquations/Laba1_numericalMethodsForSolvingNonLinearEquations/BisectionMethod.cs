@@ -11,6 +11,9 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
                 double step, double accuracy) : base(methodName, function, 
                 leftBorder, rightBorder, step, accuracy) { }
 
+        /// <summary>
+        /// Метод, запускающий процедуру решения нелинейного уравнения методом половинного деления.
+        /// </summary>
         protected override void Solve()
         {
             int countStepsToGetApproximateSolution = 0;

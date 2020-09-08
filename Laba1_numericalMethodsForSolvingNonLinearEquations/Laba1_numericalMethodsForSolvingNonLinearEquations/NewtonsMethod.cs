@@ -12,6 +12,9 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
                 leftBorder, rightBorder, step, accuracy)
         { }
 
+        /// <summary>
+        /// Метод, запускающий процедуру решения нелинейного уравнения методом Ньютона.
+        /// </summary>
         protected override void Solve()
         {
             double nthPoint = leftBorder;
