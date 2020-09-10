@@ -14,7 +14,7 @@ begin
   numberOfElementsInTriangle := numberOfLevels * (numberOfLevels + 1) div 2;
   
   j := k - numberOfElementsInTriangle;
-  i := j - numberOfLevels - 2;
+  i := numberOfLevels - j + 2;
   
   writeln('i = ', i);
   writeln('j = ', j);

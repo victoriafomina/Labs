@@ -22,7 +22,7 @@ namespace Laba1_numericalMethodsForSolvingNonLinearEquations
             const double rightBorder = 3;
             Console.WriteLine($"[{leftBorder}, {rightBorder}]");
 
-            double accuracy = Math.Pow(10, -8);
+            double accuracy = Math.Pow(10, -6);
             Console.WriteLine($"eps = {accuracy}\n");
 
             const int numberOfParts = 1000;
