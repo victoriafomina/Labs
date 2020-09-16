@@ -8,10 +8,6 @@ namespace Coding
     {
         public static void Main(string[] args)
         {
-            CodingLogic c = new CodingLogic("expression : ( formula )*( ',' ) .");
-            c.Run();
-            Console.WriteLine("\n");
-
             string path = "..\\..\\..\\text1.txt";
             string text;
 
