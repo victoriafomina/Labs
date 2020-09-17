@@ -62,8 +62,8 @@ namespace Coding
                 }
                 else if (Char.IsLetter((splitedText[i])[0]) && splitedText[i + 1] != ":")
                 {
-                    WordHandler(i, nonterminals, "nonterminals", firstNonterminalIndex, lastNonterminalIndex);
-                    Console.Write($"{GetWordCode(splitedText[i], nonterminals)}, ");
+                    WordHandler(i, terminals, "terminals", firstTerminalIndex, lastTerminalIndex);
+                    Console.Write($"{GetWordCode(splitedText[i], terminals)}, ");
                 }
                 else if (splitedText[i] == "\n")
                 {
