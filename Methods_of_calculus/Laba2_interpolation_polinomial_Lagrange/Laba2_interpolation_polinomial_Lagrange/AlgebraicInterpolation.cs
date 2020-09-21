@@ -30,11 +30,11 @@ namespace Laba2_interpolation_polinomial_Lagrange
             this.function = function;
             sorted = false;
             isCalculated = false;
+            PrintSortedTable();
         }
 
         public double Run()
         {
-            SortedTable();
             return LagrangePolynomialValue();
         }
 
@@ -68,7 +68,7 @@ namespace Laba2_interpolation_polinomial_Lagrange
             return result;
         }
 
-        public void SortedTable()
+        public void PrintSortedTable()
         {
             if (!sorted)
             {
@@ -76,6 +76,8 @@ namespace Laba2_interpolation_polinomial_Lagrange
                 sorted = true;
             }
 
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Узлы, по которым строится интерполяционный полином:");
             Utils.PrintTable(interpolationNodes, degreeOfPolynomial);
         }
 
@@ -93,7 +95,7 @@ namespace Laba2_interpolation_polinomial_Lagrange
         private void Sort()
         {
             interpolationNodes.Sort(((double, double) point1, (double, double) point2) =>
-                Math.Abs(point1.Item1 - interpolationPoint).CompareTo(Math.Abs(point2.Item2 - interpolationPoint)));
+                    Math.Abs(point1.Item1 - interpolationPoint).CompareTo(Math.Abs(point2.Item2 - interpolationPoint)));
         }        
     }
 }
