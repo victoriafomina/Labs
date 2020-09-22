@@ -10,14 +10,16 @@ namespace Laba2_interpolation_polinomial_Lagrange
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("ЗАДАЧА АЛГЕБРАИЧЕСКОГО ИНТЕРПОЛИРОВАНИЯ");
             Console.WriteLine("Вариант 14\n");
-            const int numberOfValues = 16;
+            const int numberOfValues = 41;
 
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Число значений в таблице: ");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"{numberOfValues}\n");
             const double leftBorder = 0;
-            const double rightBorder = 1;
+            const double rightBorder = 4;
+
+            Console.WriteLine($"[{leftBorder}, {rightBorder}]\n");
 
             IFunction function = new FunctionTest();
             List<(double, double)> interpolationNodes = new List<(double, double)>();
@@ -40,6 +42,17 @@ namespace Laba2_interpolation_polinomial_Lagrange
                 Console.Write($"\nВведите степень многочлена n (n < {numberOfValues}): ");
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 int degreeOfPolynomial = int.Parse(Console.ReadLine());
+
+                while (degreeOfPolynomial >= numberOfValues || degreeOfPolynomial < 1)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Введено некорректное n");
+                    Console.ResetColor();
+                    Console.Write($"\nВведите степень многочлена n (n < {numberOfValues}): ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    degreeOfPolynomial = int.Parse(Console.ReadLine());
+                    Console.ResetColor();
+                }
                 Console.WriteLine();
 
                 AlgebraicInterpolation interpolation = new AlgebraicInterpolation(interpolationNodes, interpolationPoint,
@@ -86,7 +99,7 @@ namespace Laba2_interpolation_polinomial_Lagrange
             Console.ForegroundColor = ConsoleColor.Yellow;
             double interpolationPoint = double.Parse(Console.ReadLine());
             Console.ResetColor();
-
+            /*
             while (interpolationPoint < leftBorder || interpolationPoint > rightBorder)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -95,7 +108,7 @@ namespace Laba2_interpolation_polinomial_Lagrange
                 Console.Write($"Введите точку интерполирования (из отрезка [{leftBorder}, {rightBorder}]): ");
                 interpolationPoint = double.Parse(Console.ReadLine());
             }
-
+            */
             return interpolationPoint;
         }
     }

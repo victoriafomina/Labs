@@ -95,7 +95,7 @@ namespace Laba2_interpolation_polinomial_Lagrange
         private void Sort()
         {
             interpolationNodes.Sort(((double, double) point1, (double, double) point2) =>
-                    Math.Abs(point1.Item1 - interpolationPoint).CompareTo(Math.Abs(point2.Item2 - interpolationPoint)));
+                    Math.Abs(point1.Item1 - interpolationPoint).CompareTo(Math.Abs(point2.Item1 - interpolationPoint)));
         }        
     }
 }
