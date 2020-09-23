@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace Coding
 {
@@ -8,7 +7,7 @@ namespace Coding
     {
         public static void Main(string[] args)
         {
-            string path = "..\\..\\..\\text1.txt";
+            string path = "..\\..\\..\\text.txt";
             string text;
 
             using (StreamReader reader = new StreamReader(path))
