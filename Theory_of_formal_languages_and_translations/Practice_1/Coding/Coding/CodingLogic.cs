@@ -38,13 +38,11 @@ namespace Coding
                 if (splitedText[i] == "\'")
                 {
                     WordHandler(i + 1, terminals, "terminals", firstTerminalIndex, lastTerminalIndex);
-                    Console.Write($"{GetWordCode(splitedText[i + 1], terminals)}, ");
                     i += 2;
                 }
                 else if (splitedText[i] == "$")
                 {
                     WordHandler(i + 1, semantics, "semantics", firstSemanticIndex, lastSemanticIndex);
-                    Console.Write($"{GetWordCode(splitedText[i + 1], semantics)}, ");
                     ++i;
                 }
                 else if (splitedText[i] == ":")
@@ -63,7 +61,6 @@ namespace Coding
                 else if (Char.IsLetter((splitedText[i])[0]) && splitedText[i + 1] != ":")
                 {
                     WordHandler(i, nonterminals, "nonterminals", firstNonterminalIndex, lastNonterminalIndex);
-                    Console.Write($"{GetWordCode(splitedText[i], nonterminals)}, ");
                 }
                 else if (splitedText[i] == "\n")
                 {
@@ -76,12 +73,7 @@ namespace Coding
         {
             var currentWord = splitedText[index];
 
-            if (WordAlreadyExists(currentWord, words))
-            {
-                var codeOfWord = GetWordCode(currentWord, words);
-                Console.Write($"{codeOfWord}, ");
-            }
-            else
+            if (!WordAlreadyExists(currentWord, words))
             {
                 if (words.Count >= lastWordIndex - firstWordIndex + 1)
                 {
@@ -90,6 +82,9 @@ namespace Coding
 
                 words.Add((currentWord, firstWordIndex + words.Count));
             }
+
+            var codeOfWord = GetWordCode(currentWord, words);
+            Console.Write($"{codeOfWord}, ");
         }
 
         private int GetWordCode(string word, List<(string, int)> words)
@@ -137,7 +132,7 @@ namespace Coding
                     splitedText.Add(text.Substring(i + 1, pairedQuotationMarkIndex - i - 1));
                     splitedText.Add("\'");
                     prevSeparatorIndex = pairedQuotationMarkIndex;
-                    i = pairedQuotationMarkIndex + 1;
+                    i = pairedQuotationMarkIndex;
                 }
                 else if (separators.Contains(text[i]))
                 {
