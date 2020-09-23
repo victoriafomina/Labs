@@ -21,7 +21,7 @@ namespace AlphabeticalIndex
             Console.WriteLine(text);
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\nCodes:");
+            Console.WriteLine("\nAlphabetical index:");
             Console.ForegroundColor = ConsoleColor.Yellow;
             AlphabeticalIndex alphabeticalIndex = new AlphabeticalIndex(text);
             
