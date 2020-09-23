@@ -8,7 +8,7 @@ namespace AlphabeticalIndex
 
         private List<string> splitedText;
 
-        private char[] separators = { ' ', '\t', '\r', '.', ',', ';', '-', '−', '–', '—' };
+        private char[] separators = { ' ', '\t', '\r', '.', ',', ';', '-', '−', '–', '—', '\'' };
 
         private List<(string, List<int>)> alphabeticalIndex;
 

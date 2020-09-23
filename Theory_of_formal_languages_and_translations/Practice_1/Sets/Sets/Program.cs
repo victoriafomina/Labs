@@ -6,7 +6,9 @@ namespace Sets
     {
         public static void Main(string[] args)
         {
-
+            TextUtilsTests.AllSymbolsInTextsTest();
+            TextUtilsTests.SymbolsInFirstTextButNotInSecondTest();
+            TextUtilsTests.VariousSymbolsNumberTest();
         }
     }
 }
