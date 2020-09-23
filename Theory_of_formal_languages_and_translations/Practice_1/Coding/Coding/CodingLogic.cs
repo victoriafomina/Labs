@@ -50,6 +50,14 @@ namespace Coding
                     WordHandler(i - 1, nonterminals, "nonterminals", firstNonterminalIndex, lastNonterminalIndex);
                     Console.Write($"{symbols.IndexOf(splitedText[i]) + 1}, ");
                 }
+                else if (splitedText[i].Length == 1 && char.IsUpper(splitedText[i][0])) // большие латинские буквы
+                {
+                    WordHandler(i, nonterminals, "nonterminals", firstNonterminalIndex, lastNonterminalIndex);
+                }
+                else if (splitedText[i].Length == 1 && char.IsLower(splitedText[i][0])) // малые латинские буквы
+                {
+                    WordHandler(i, terminals, "terminals", firstTerminalIndex, lastTerminalIndex);
+                }
                 else if (symbols.Contains(splitedText[i]))
                 {
                     Console.Write($"{symbols.IndexOf(splitedText[i]) + 1}, ");
