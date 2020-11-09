@@ -7,11 +7,9 @@ namespace Laba4_ApproximateCalculationOfIntegrals
     public class QuadratureFormulaTrapezoid : IApproximateCalculate
     {
         private IFunction function;
-        private IFunction weightFunction;
 
-        public QuadratureFormulaTrapezoid(IFunction weightFunction, IFunction function)
+        public QuadratureFormulaTrapezoid(IFunction function)
         {
-            this.weightFunction = weightFunction;
             this.function = function;
         }
 
@@ -23,8 +21,7 @@ namespace Laba4_ApproximateCalculationOfIntegrals
 
             for (var i = 0; i < numberOfParts + 1; ++i)
             {
-                double temp = weightFunction.Value(leftBorder + i * step) *
-                        function.Value(leftBorder + i * step);
+                double temp = function.Value(leftBorder + i * step);
 
                 if (i == 0 || i == numberOfParts)
                 {

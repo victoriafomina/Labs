@@ -6,7 +6,6 @@ namespace Laba4_ApproximateCalculationOfIntegrals
 {
     public class UserInterface
     {
-        IFunction weightFunction;
         IFunction function;
         double leftBorder;
         double rightBorder;
@@ -17,16 +16,15 @@ namespace Laba4_ApproximateCalculationOfIntegrals
         QuadratureFormulaSimpson simpson;
         QuadratureFormulaTrapezoid trapezoid;
 
-        public UserInterface(IFunction weightFunction, IFunction function)
+        public UserInterface(IFunction function)
         {
-            this.weightFunction = weightFunction;
             this.function = function;
 
-            leftRectangles = new QuadratureFormulaLeftRectangles(weightFunction, function);
-            rightRectangles = new QuadratureFormulaRightRectangles(weightFunction, function);
-            mediumRectangles = new QuadratureFormulaMediumRectangles(weightFunction, function);
-            simpson = new QuadratureFormulaSimpson(weightFunction, function);
-            trapezoid = new QuadratureFormulaTrapezoid(weightFunction, function);
+            leftRectangles = new QuadratureFormulaLeftRectangles(function);
+            rightRectangles = new QuadratureFormulaRightRectangles(function);
+            mediumRectangles = new QuadratureFormulaMediumRectangles(function);
+            simpson = new QuadratureFormulaSimpson(function);
+            trapezoid = new QuadratureFormulaTrapezoid(function);
         }
 
         public void Run()
@@ -92,7 +90,6 @@ namespace Laba4_ApproximateCalculationOfIntegrals
         private void FunctionInfo()
         {
             Console.WriteLine($"Функция: {function.Print()}");
-            Console.WriteLine($"Весовая функция: {weightFunction.Print()}");
             Console.WriteLine();
         }
 

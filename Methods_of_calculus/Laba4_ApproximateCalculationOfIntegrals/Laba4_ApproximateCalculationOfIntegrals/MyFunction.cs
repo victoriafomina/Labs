@@ -8,12 +8,12 @@ namespace Laba4_ApproximateCalculationOfIntegrals
     {
         public double Value(double x)
         {
-            return x;
+            return Math.Cos(2 * x) + Math.Exp(x);
         }
 
         public string Print()
         {
-            return "y = x";
+            return "f(x) = cos(2x) + e^x";
         }
     }
 }

@@ -4,16 +4,11 @@ using System.Text;
 
 namespace Laba4_ApproximateCalculationOfIntegrals
 {
-    public class WeightFunction : IFunction
+    public class DerivativeFunction
     {
         public double Value(double x)
         {
-            return 1;
-        }
-
-        public string Print()
-        {
-            return "y = 1";
+            return -(Math.Sin(x) * Math.Cos(x)) + Math.Exp(x);
         }
     }
 }

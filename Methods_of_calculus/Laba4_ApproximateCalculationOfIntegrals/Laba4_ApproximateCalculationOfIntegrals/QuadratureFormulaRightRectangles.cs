@@ -7,11 +7,9 @@ namespace Laba4_ApproximateCalculationOfIntegrals
     public class QuadratureFormulaRightRectangles : IApproximateCalculate
     {
         private IFunction function;
-        private IFunction weightFunction;
 
-        public QuadratureFormulaRightRectangles(IFunction weightFunction, IFunction function)
+        public QuadratureFormulaRightRectangles(IFunction function)
         {
-            this.weightFunction = weightFunction;
             this.function = function;
         }
 
@@ -23,8 +21,7 @@ namespace Laba4_ApproximateCalculationOfIntegrals
 
             for (var i = 0; i < numberOfParts; ++i)
             {
-                result += weightFunction.Value((leftBorder + step) * i * step) *
-                        function.Value((leftBorder + step) * i * step);
+                result += function.Value((leftBorder + step) * i * step);
             }
 
             result *= step;

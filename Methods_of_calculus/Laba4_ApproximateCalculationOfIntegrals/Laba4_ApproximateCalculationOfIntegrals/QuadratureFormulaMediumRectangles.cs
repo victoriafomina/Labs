@@ -7,11 +7,9 @@ namespace Laba4_ApproximateCalculationOfIntegrals
     public class QuadratureFormulaMediumRectangles : IApproximateCalculate
     {
         private IFunction function;
-        private IFunction weightFunction;
 
-        public QuadratureFormulaMediumRectangles(IFunction weightFunction, IFunction function)
+        public QuadratureFormulaMediumRectangles(IFunction function)
         {
-            this.weightFunction = weightFunction;
             this.function = function;
         }
 
@@ -23,8 +21,7 @@ namespace Laba4_ApproximateCalculationOfIntegrals
 
             for (var i = 0; i < numberOfParts; ++i)
             {
-                result += weightFunction.Value((leftBorder + step / 2) * i * step) *
-                        function.Value((leftBorder + step / 2) * i * step);
+                result += function.Value((leftBorder + step / 2) * i * step);
             }
 
             result *= step;
