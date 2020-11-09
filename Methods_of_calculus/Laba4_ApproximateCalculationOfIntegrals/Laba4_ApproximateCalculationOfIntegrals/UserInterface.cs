@@ -39,6 +39,36 @@ namespace Laba4_ApproximateCalculationOfIntegrals
             while (true)
             {
                 FunctionCalculatesInfo();
+
+                Console.WriteLine("-----------------------------------------------------------------");
+                Console.WriteLine("0 - завершить программу");
+                Console.WriteLine("1 - изменить пределы интегрирования");
+                Console.WriteLine("2 - изменить число промежутков деления");
+                Console.WriteLine("3 - изменить пределы интегрирования и число промежутков деления");
+                Console.WriteLine("------------------------------------------------------------------\n");
+
+                int number = int.Parse(Console.ReadLine());
+                while (number < 0 || number > 3)
+                {
+                    Console.WriteLine("Введено некорректное значение!!!");
+                    number = int.Parse(Console.ReadLine());
+                }
+
+                switch (number)
+                {
+                    case 0:
+                        return;
+                    case 1:
+                        SetBorders();
+                        break;
+                    case 2:
+                        SetNumberOfParts();
+                        break;
+                    case 3:
+                        SetBorders();
+                        SetNumberOfParts();
+                        break;
+                }
             }
         }
 
@@ -49,19 +79,21 @@ namespace Laba4_ApproximateCalculationOfIntegrals
             Console.WriteLine($"{mediumRectangles.FormulaName()}: {mediumRectangles.Calculate(leftBorder, rightBorder, numberOfParts)}");
             Console.WriteLine($"{trapezoid.FormulaName()}: {trapezoid.Calculate(leftBorder, rightBorder, numberOfParts)}");
             Console.WriteLine($"{simpson.FormulaName()}: {simpson.Calculate(leftBorder, rightBorder, numberOfParts)}");
+            Console.WriteLine();
         }
 
         private void SetNumberOfParts()
         {
             Console.Write($"Число промежутков деления: ");
             numberOfParts = int.Parse(Console.ReadLine());
-            Console.WriteLine(numberOfParts);
+            Console.WriteLine();
         }
 
         private void FunctionInfo()
         {
             Console.WriteLine($"Функция: {function.Print()}");
             Console.WriteLine($"Весовая функция: {weightFunction.Print()}");
+            Console.WriteLine();
         }
 
         private void SetBorders()
@@ -69,10 +101,9 @@ namespace Laba4_ApproximateCalculationOfIntegrals
             Console.WriteLine("Пределы интегрирования");
             Console.Write("Левый предел: ");
             leftBorder = double.Parse(Console.ReadLine());
-            Console.WriteLine(leftBorder);
-            Console.Write("Правый предел:");
+            Console.Write("Правый предел: ");
             rightBorder = double.Parse(Console.ReadLine());
-            Console.WriteLine(rightBorder);
+            Console.WriteLine();
         }
     }
 }

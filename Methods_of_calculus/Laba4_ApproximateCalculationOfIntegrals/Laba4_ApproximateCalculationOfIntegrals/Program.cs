@@ -6,9 +6,8 @@ namespace Laba4_ApproximateCalculationOfIntegrals
     {
         public static void Main(string[] args)
         {
-            double a = 3 / (double)2;
-
-            Console.WriteLine($"Hello World! {a}");
+            UserInterface ui = new UserInterface(new WeightFunction(), new MyFunction());
+            ui.Run();
         }
     }
 }
