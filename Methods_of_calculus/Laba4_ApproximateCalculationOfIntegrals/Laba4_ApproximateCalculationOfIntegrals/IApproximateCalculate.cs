@@ -6,8 +6,7 @@ namespace Laba4_ApproximateCalculationOfIntegrals
 {
     public interface IApproximateCalculate
     {
-        public double Calculate(IFunction weightFunction, IFunction function, double leftBorder, 
-                double rightBorder, int numberOfParts);
+        public double Calculate(double leftBorder, double rightBorder, int numberOfParts);
 
         public string FormulaName();
     }

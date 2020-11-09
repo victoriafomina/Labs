@@ -6,8 +6,16 @@ namespace Laba4_ApproximateCalculationOfIntegrals
 {
     public class QuadratureFormulaRightRectangles : IApproximateCalculate
     {
-        public double Calculate(IFunction weightFunction, IFunction function, double leftBorder, 
-                double rightBorder, int numberOfParts)
+        private IFunction function;
+        private IFunction weightFunction;
+
+        public QuadratureFormulaRightRectangles(IFunction weightFunction, IFunction function)
+        {
+            this.weightFunction = weightFunction;
+            this.function = function;
+        }
+
+        public double Calculate(double leftBorder, double rightBorder, int numberOfParts)
         {
             double step = (rightBorder - leftBorder) / numberOfParts;
 
