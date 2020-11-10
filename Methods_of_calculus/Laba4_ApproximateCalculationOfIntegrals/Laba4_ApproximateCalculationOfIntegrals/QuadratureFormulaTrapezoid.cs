@@ -14,19 +14,8 @@ namespace Laba4_ApproximateCalculationOfIntegrals
         }
 
         public double Calculate(double leftBorder, double rightBorder, int numberOfParts)
-        {
-            /*
-            double number = 0;
-            double step = (rightBorder - leftBorder) / (2 * numberOfParts);
-
-            for (int i = 0; i < numberOfParts; i++)
-            {
-                number += (function.Value(leftBorder + i * step) + function.Value(leftBorder + (i + 1) * step));
-            }
-            return number * step / 2;
-            */
-
-            double step = (rightBorder - leftBorder) / (2 * numberOfParts);
+        {   
+            double step = (rightBorder - leftBorder) / numberOfParts;
 
             double result = 0;
 
