@@ -8,6 +8,8 @@ namespace Laba4_ApproximateCalculationOfIntegrals
     {
         public double Calculate(double leftBorder, double rightBorder, int numberOfParts);
 
+        public double Value { get; set; }
+
         public string FormulaName();
     }
 }

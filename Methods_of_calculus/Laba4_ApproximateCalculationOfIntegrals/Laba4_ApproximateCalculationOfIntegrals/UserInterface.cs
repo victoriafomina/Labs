@@ -17,12 +17,6 @@ namespace Laba4_ApproximateCalculationOfIntegrals
         QuadratureFormulaSimpson simpson;
         QuadratureFormulaTrapezoid trapezoid;
 
-        private double leftRectanglesValue;
-        private double rightRectanglesValue;
-        private double mediumRectanglesValue;
-        private double simsonValue;
-        private double trapezoidValue;
-
         public UserInterface(IFunction function, IFunction derivativeFunction)
         {
             this.function = function;

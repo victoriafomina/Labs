@@ -13,6 +13,8 @@ namespace Laba4_ApproximateCalculationOfIntegrals
             this.function = function;
         }
 
+        public double Value { get; set; }
+
         public double Calculate(double leftBorder, double rightBorder, int numberOfParts)
         {   
             double step = (rightBorder - leftBorder) / numberOfParts;
@@ -34,6 +36,8 @@ namespace Laba4_ApproximateCalculationOfIntegrals
             }
 
             result *= (rightBorder - leftBorder) / (2 * numberOfParts);
+
+            Value = result;
 
             return result;
         }
