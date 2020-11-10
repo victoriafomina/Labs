@@ -7,7 +7,7 @@ namespace Laba4_ApproximateCalculationOfIntegrals
     public class UserInterface
     {
         IFunction function;
-        IFunction derivativeFunction;
+        IFunction antiderivativeFunction;
         double leftBorder;
         double rightBorder;
         int numberOfParts;
@@ -20,7 +20,7 @@ namespace Laba4_ApproximateCalculationOfIntegrals
         public UserInterface(IFunction function, IFunction derivativeFunction)
         {
             this.function = function;
-            this.derivativeFunction = derivativeFunction;
+            this.antiderivativeFunction = derivativeFunction;
 
             leftRectangles = new QuadratureFormulaLeftRectangles(function);
             rightRectangles = new QuadratureFormulaRightRectangles(function);
@@ -31,6 +31,8 @@ namespace Laba4_ApproximateCalculationOfIntegrals
 
         public void Run()
         {
+            Console.WriteLine("ПРИБЛИЖЁННОЕ ВЫЧИСЛЕНИЕ ИНТЕГРАЛА ПО СОСТАВНЫМ КВАДРАТУРНЫМ ФОРМУЛАМ\n");
+
             FunctionInfo();
 
             SetBorders();
@@ -130,7 +132,7 @@ namespace Laba4_ApproximateCalculationOfIntegrals
 
         private double PreciselyValue()
         {
-            return derivativeFunction.Value(rightBorder) - derivativeFunction.Value(leftBorder);
+            return antiderivativeFunction.Value(rightBorder) - antiderivativeFunction.Value(leftBorder);
         }
 
         private void PreciselyValueInfo()

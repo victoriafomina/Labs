@@ -8,12 +8,15 @@ namespace Laba4_ApproximateCalculationOfIntegrals
     {
         public string Print()
         {
-            return "f(x) = - 4 * sin(x) * cos(x) + e^x";
+            return "f(x) = sin(x) * cos(x) + e^x";
         }
 
         public double Value(double x)
         {
-            return -(4 * Math.Sin(x) * Math.Cos(x)) + Math.Exp(x);
+            // return Math.Sin(x) * Math.Cos(x) + Math.Exp(x);
+            return x * x;
+            // return x * x * x;
+            // return x * x * x * x;
         }
     }
 }
