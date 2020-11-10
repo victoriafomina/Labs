@@ -86,25 +86,59 @@ namespace Laba4_ApproximateCalculationOfIntegrals
             Console.Write("Абсолютная фактическая погрешность: ");
             Console.WriteLine(Math.Abs(function.Calculate(leftBorder, rightBorder, numberOfParts) -
                     PreciselyValue()));
-            Console.WriteLine();
+        }
+
+
+        private void TheoreticalError(IApproximateCalculate function)
+        {
+            double constant = 0;
+            double result = 0;
+
+            if (function is QuadratureFormulaLeftRectangles || function is QuadratureFormulaRightRectangles)
+            {
+                constant = 1.0 / 2.0;
+                result = constant * (rightBorder - leftBorder);
+            }
+            else if (function is QuadratureFormulaMediumRectangles)
+            {
+                constant = 1.0 / 24.0;
+                result = constant * (rightBorder - leftBorder) * (rightBorder - leftBorder) / numberOfParts;
+            }
+            else if (function is QuadratureFormulaTrapezoid)
+            {
+                constant = 1.0 / 12.0;
+                result = constant * (rightBorder - leftBorder) * (rightBorder - leftBorder) / numberOfParts;
+            }
+            else
+            {
+                constant = 1.0 / 180.0;
+                result = constant * (rightBorder - leftBorder) * Math.Pow((rightBorder - leftBorder) / numberOfParts, 3);
+            }
+
+            Console.WriteLine($"Теоретическая погрешность: {result * (1 + Math.Exp(rightBorder))}\n");
         }
 
         private void FunctionCalculatesInfo()
         {
             Console.WriteLine($"{leftRectangles.FormulaName()}: {leftRectangles.Calculate(leftBorder, rightBorder, numberOfParts)}");
             AbsoluteError(leftRectangles);
+            TheoreticalError(leftRectangles);
 
             Console.WriteLine($"{rightRectangles.FormulaName()}: {rightRectangles.Calculate(leftBorder, rightBorder, numberOfParts)}");
             AbsoluteError(rightRectangles);
+            TheoreticalError(rightRectangles);
 
             Console.WriteLine($"{mediumRectangles.FormulaName()}: {mediumRectangles.Calculate(leftBorder, rightBorder, numberOfParts)}");
             AbsoluteError(mediumRectangles);
+            TheoreticalError(mediumRectangles);
 
             Console.WriteLine($"{trapezoid.FormulaName()}: {trapezoid.Calculate(leftBorder, rightBorder, numberOfParts)}");
             AbsoluteError(trapezoid);
+            TheoreticalError(trapezoid);
 
             Console.WriteLine($"{simpson.FormulaName()}: {simpson.Calculate(leftBorder, rightBorder, numberOfParts)}");
             AbsoluteError(simpson);
+            TheoreticalError(simpson);
 
             Console.WriteLine();
         }
