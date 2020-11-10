@@ -84,8 +84,7 @@ namespace Laba4_ApproximateCalculationOfIntegrals
         private void AbsoluteError(IApproximateCalculate function)
         {
             Console.Write("Абсолютная фактическая погрешность: ");
-            Console.WriteLine(Math.Abs(function.Calculate(leftBorder, rightBorder, numberOfParts) -
-                    PreciselyValue()));
+            Console.WriteLine(Math.Abs(function.Value - PreciselyValue()));
         }
 
 
@@ -94,11 +93,6 @@ namespace Laba4_ApproximateCalculationOfIntegrals
             double result = rightBorder - leftBorder;
 
             double h = (rightBorder - leftBorder) / numberOfParts;
-
-            if (function is QuadratureFormulaSimpson)
-            {
-                h /= 2;
-            }
 
             double constant;
             if (function is QuadratureFormulaLeftRectangles || function is QuadratureFormulaRightRectangles)

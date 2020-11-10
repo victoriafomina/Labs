@@ -13,7 +13,7 @@ namespace Laba4_ApproximateCalculationOfIntegrals
             this.function = function;
         }
 
-        public double Value { get; private set; }
+        public double Value { get; set; }
 
         public double Calculate(double leftBorder, double rightBorder, int numberOfParts)
         {
