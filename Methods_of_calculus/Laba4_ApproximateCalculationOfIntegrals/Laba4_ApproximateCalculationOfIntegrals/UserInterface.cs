@@ -7,6 +7,7 @@ namespace Laba4_ApproximateCalculationOfIntegrals
     public class UserInterface
     {
         IFunction function;
+        IFunction derivativeFunction;
         double leftBorder;
         double rightBorder;
         int numberOfParts;
@@ -16,9 +17,10 @@ namespace Laba4_ApproximateCalculationOfIntegrals
         QuadratureFormulaSimpson simpson;
         QuadratureFormulaTrapezoid trapezoid;
 
-        public UserInterface(IFunction function)
+        public UserInterface(IFunction function, IFunction derivativeFunction)
         {
             this.function = function;
+            this.derivativeFunction = derivativeFunction;
 
             leftRectangles = new QuadratureFormulaLeftRectangles(function);
             rightRectangles = new QuadratureFormulaRightRectangles(function);
@@ -36,6 +38,8 @@ namespace Laba4_ApproximateCalculationOfIntegrals
 
             while (true)
             {
+                Console.WriteLine();
+                PreciselyValueInfo();
                 FunctionCalculatesInfo();
 
                 Console.WriteLine("-----------------------------------------------------------------");
@@ -45,10 +49,15 @@ namespace Laba4_ApproximateCalculationOfIntegrals
                 Console.WriteLine("3 - изменить пределы интегрирования и число промежутков деления");
                 Console.WriteLine("------------------------------------------------------------------\n");
 
+                Console.Write("Введите число от 0 до 3: ");
                 int number = int.Parse(Console.ReadLine());
+
                 while (number < 0 || number > 3)
                 {
-                    Console.WriteLine("Введено некорректное значение!!!");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\nВведено некорректное значение!!!");
+                    Console.ResetColor();
+                    Console.Write("Введите число от 0 до 3: ");
                     number = int.Parse(Console.ReadLine());
                 }
 
@@ -70,21 +79,47 @@ namespace Laba4_ApproximateCalculationOfIntegrals
             }
         }
 
+        private void AbsoluteError(IApproximateCalculate function)
+        {
+            Console.Write("Абсолютная фактическая погрешность: ");
+            Console.WriteLine(Math.Abs(function.Calculate(leftBorder, rightBorder, numberOfParts) -
+                    PreciselyValue()));
+            Console.WriteLine();
+        }
+
         private void FunctionCalculatesInfo()
         {
             Console.WriteLine($"{leftRectangles.FormulaName()}: {leftRectangles.Calculate(leftBorder, rightBorder, numberOfParts)}");
+            AbsoluteError(leftRectangles);
+
             Console.WriteLine($"{rightRectangles.FormulaName()}: {rightRectangles.Calculate(leftBorder, rightBorder, numberOfParts)}");
+            AbsoluteError(rightRectangles);
+
             Console.WriteLine($"{mediumRectangles.FormulaName()}: {mediumRectangles.Calculate(leftBorder, rightBorder, numberOfParts)}");
+            AbsoluteError(mediumRectangles);
+
             Console.WriteLine($"{trapezoid.FormulaName()}: {trapezoid.Calculate(leftBorder, rightBorder, numberOfParts)}");
+            AbsoluteError(trapezoid);
+
             Console.WriteLine($"{simpson.FormulaName()}: {simpson.Calculate(leftBorder, rightBorder, numberOfParts)}");
+            AbsoluteError(simpson);
+
             Console.WriteLine();
         }
 
         private void SetNumberOfParts()
         {
-            Console.Write($"Число промежутков деления: ");
+            Console.Write("Число промежутков деления: ");
             numberOfParts = int.Parse(Console.ReadLine());
-            Console.WriteLine();
+
+            while (numberOfParts <= 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nЧисло промежутков деления должно быть положительным!!!");
+                Console.ResetColor();
+                Console.Write("Число промежутков деления: ");
+                numberOfParts = int.Parse(Console.ReadLine());
+            }
         }
 
         private void FunctionInfo()
@@ -93,13 +128,32 @@ namespace Laba4_ApproximateCalculationOfIntegrals
             Console.WriteLine();
         }
 
+        private double PreciselyValue()
+        {
+            return derivativeFunction.Value(rightBorder) - derivativeFunction.Value(leftBorder);
+        }
+
+        private void PreciselyValueInfo()
+        {
+            Console.WriteLine($"Точное значение: {PreciselyValue()}\n");
+        }
+
         private void SetBorders()
         {
-            Console.WriteLine("Пределы интегрирования");
+            Console.WriteLine("\nПределы интегрирования");
             Console.Write("Левый предел: ");
             leftBorder = double.Parse(Console.ReadLine());
             Console.Write("Правый предел: ");
             rightBorder = double.Parse(Console.ReadLine());
+            
+            while (rightBorder <= leftBorder)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nПравый предел интегрерирования должен быть больше левого!");
+                Console.ResetColor();
+                Console.Write("Правый предел: ");
+                rightBorder = double.Parse(Console.ReadLine());
+            }
             Console.WriteLine();
         }
     }

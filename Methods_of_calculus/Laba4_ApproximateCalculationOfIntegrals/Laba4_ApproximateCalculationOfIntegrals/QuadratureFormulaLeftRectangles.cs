@@ -22,7 +22,7 @@ namespace Laba4_ApproximateCalculationOfIntegrals
 
             for (var i = 0; i < numberOfParts; ++i)
             {
-                result += function.Value((leftBorder) * i * step);
+                result += function.Value(leftBorder + i * step);
             }
 
             result *= step;

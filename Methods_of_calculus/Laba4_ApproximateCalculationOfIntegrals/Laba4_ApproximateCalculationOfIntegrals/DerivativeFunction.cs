@@ -4,11 +4,16 @@ using System.Text;
 
 namespace Laba4_ApproximateCalculationOfIntegrals
 {
-    public class DerivativeFunction
+    public class DerivativeFunction : IFunction
     {
+        public string Print()
+        {
+            return "f(x) = - 4 * sin(x) * cos(x) + e^x";
+        }
+
         public double Value(double x)
         {
-            return -(Math.Sin(x) * Math.Cos(x)) + Math.Exp(x);
+            return -(4 * Math.Sin(x) * Math.Cos(x)) + Math.Exp(x);
         }
     }
 }

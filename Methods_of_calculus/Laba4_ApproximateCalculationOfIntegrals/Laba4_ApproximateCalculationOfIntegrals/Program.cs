@@ -6,7 +6,7 @@ namespace Laba4_ApproximateCalculationOfIntegrals
     {
         public static void Main(string[] args)
         {
-            UserInterface ui = new UserInterface(new WeightFunction(), new MyFunction());
+            UserInterface ui = new UserInterface(new MyFunction(), new DerivativeFunction());
             ui.Run();
         }
     }
