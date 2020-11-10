@@ -23,7 +23,7 @@ namespace Laba4_ApproximateCalculationOfIntegrals
             {
                 double temp = function.Value(leftBorder + i * step);
 
-                if (i == 0 || i == numberOfParts)
+                if (i == 0 || i == 2 * numberOfParts)
                 {
                     result += temp;
                 }
