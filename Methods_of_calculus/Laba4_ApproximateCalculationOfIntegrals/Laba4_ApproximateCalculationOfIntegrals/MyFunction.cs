@@ -8,8 +8,9 @@ namespace Laba4_ApproximateCalculationOfIntegrals
     {
         public double Value(double x)
         {
-            // return Math.Cos(2 * x) + Math.Exp(x);
-            return 2 * x;
+            return Math.Cos(2 * x) + Math.Exp(x);
+            // return 1;
+            // return 2 * x;
             // return 3 * x * x;
             // return 4 * x * x * x;
         }
