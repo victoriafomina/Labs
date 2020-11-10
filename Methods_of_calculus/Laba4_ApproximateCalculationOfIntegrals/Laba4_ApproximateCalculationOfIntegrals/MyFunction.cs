@@ -17,9 +17,11 @@ namespace Laba4_ApproximateCalculationOfIntegrals
 
         public string Print()
         {
-            // return "f(x) = cos(2x) + e^x";
+            return "f(x) = cos(2x) + e^x";
+            // return "f(x) = 1";
+            // return "f(x) = 2x";
             // return "f(x) = 3x^2";
-            return "f(x) = 4*x^3";
+            // return "f(x) = 4*x^3";
         }
     }
 }

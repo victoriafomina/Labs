@@ -32,7 +32,7 @@ namespace Laba4_ApproximateCalculationOfIntegrals
 
         public string FormulaName()
         {
-            return "Составная квадратурная формула левых треугольников";
+            return "Составная квадратурная формула левых прямоугольников";
         }
     }
 }

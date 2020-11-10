@@ -31,7 +31,7 @@ namespace Laba4_ApproximateCalculationOfIntegrals
 
         public string FormulaName()
         {
-            return "Составная квадратурная формула правых треугольников";
+            return "Составная квадратурная формула правых прямоугольников";
         }
     }
 }

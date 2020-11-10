@@ -17,6 +17,12 @@ namespace Laba4_ApproximateCalculationOfIntegrals
         QuadratureFormulaSimpson simpson;
         QuadratureFormulaTrapezoid trapezoid;
 
+        private double leftRectanglesValue;
+        private double rightRectanglesValue;
+        private double mediumRectanglesValue;
+        private double simsonValue;
+        private double trapezoidValue;
+
         public UserInterface(IFunction function, IFunction derivativeFunction)
         {
             this.function = function;
@@ -91,28 +97,35 @@ namespace Laba4_ApproximateCalculationOfIntegrals
 
         private void TheoreticalError(IApproximateCalculate function)
         {
-            double constant = 0;
-            double result = 0;
+            double result = rightBorder - leftBorder;
 
+            double h = (rightBorder - leftBorder) / numberOfParts;
+
+            if (function is QuadratureFormulaSimpson)
+            {
+                h /= 2;
+            }
+
+            double constant;
             if (function is QuadratureFormulaLeftRectangles || function is QuadratureFormulaRightRectangles)
             {
                 constant = 1.0 / 2.0;
-                result = constant * (rightBorder - leftBorder);
+                result *= constant * h;
             }
             else if (function is QuadratureFormulaMediumRectangles)
             {
                 constant = 1.0 / 24.0;
-                result = constant * (rightBorder - leftBorder) * (rightBorder - leftBorder) / numberOfParts;
+                result *= constant * h * h;
             }
             else if (function is QuadratureFormulaTrapezoid)
             {
                 constant = 1.0 / 12.0;
-                result = constant * (rightBorder - leftBorder) * (rightBorder - leftBorder) / numberOfParts;
+                result *= constant * h * h;
             }
             else
             {
-                constant = 1.0 / 180.0;
-                result = constant * (rightBorder - leftBorder) * Math.Pow((rightBorder - leftBorder) / numberOfParts, 3);
+                constant = 1.0 / 2880.0;
+                result *= constant * Math.Pow(h, 4);
             }
 
             Console.WriteLine($"Теоретическая погрешность: {result * (1 + Math.Exp(rightBorder))}\n");
