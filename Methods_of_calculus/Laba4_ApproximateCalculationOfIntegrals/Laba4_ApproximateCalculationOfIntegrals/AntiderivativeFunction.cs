@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Laba4_ApproximateCalculationOfIntegrals
 {
-    public class DerivativeFunction : IFunction
+    public class AntiderivativeFunction : IFunction
     {
         public string Print()
         {
