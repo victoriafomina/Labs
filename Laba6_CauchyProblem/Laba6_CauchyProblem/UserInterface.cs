@@ -25,9 +25,13 @@ namespace Laba6_CauchyProblem
 
         public void Run()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Численное решение Задачи Коши для обыкновенного дифференциального уравнения первого порядка\n");
+            Console.ResetColor();
+
             PrintExactSolutions();
             PrintTaylor();
+            PrintAdams();
         }
 
         private void CalculateExactSolutions()
@@ -44,7 +48,9 @@ namespace Laba6_CauchyProblem
         {
             CalculateExactSolutions();
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Точное решение задачи Коши");
+            Console.ResetColor();
             Console.WriteLine("  x  |  f(x)");
             
             for (var i = 0; i < exactSolutions.Count; ++i)
@@ -58,14 +64,16 @@ namespace Laba6_CauchyProblem
         {
             taylorsValues.Clear();
             int count = 0;
-            Console.WriteLine("Решение задачи Коши методом разложения в ряд Тейлора");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Приближенное решение задачи Коши методом разложения в ряд Тейлора");
+            Console.ResetColor();
             Console.WriteLine(" x |    f(x)    |  абсолютная погрешность ");
             
             for (var i = -2; i < N + 1; ++i)
             {
                 double currentPoint = xZero + i * step;
                 double taylorValue = logic.TaylorPolynomialValue(currentPoint);
-                Console.WriteLine($"{currentPoint} | {taylorValue} | {Math.Abs(exactSolutions[i + 2].Item2) - taylorValue}");
+                Console.WriteLine($"{currentPoint} | {taylorValue} | {Math.Abs(exactSolutions[i + 2].Item2 - taylorValue)}");
 
                 if (count < 5)
                 {
@@ -74,6 +82,28 @@ namespace Laba6_CauchyProblem
                 }    
             }
             Console.WriteLine();
+        }
+
+        private void PrintAdams()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Приближенное решение задачи Коши экстраполяционным методом Адамса 4-го порядка");
+            Console.ResetColor();
+            Console.WriteLine(" x | f(x)");
+
+            for (var i = 3; i < N + 1; ++i)
+            {
+                double currentValue = logic.AdamsMethod(step, taylorsValues);
+                taylorsValues.RemoveAt(0);
+                double currentPoint = xZero + i * step;
+                taylorsValues.Add((currentPoint, currentValue));
+                Console.WriteLine($"{currentPoint} | {currentValue}");
+            }
+
+            Console.Write($"{Math.Abs(taylorsValues[taylorsValues.Count - 1].Item2 - exactSolutions[exactSolutions.Count - 1].Item2)} - ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("абсолютная погрешность x_N");
+            Console.ResetColor();
         }
     }
 }
