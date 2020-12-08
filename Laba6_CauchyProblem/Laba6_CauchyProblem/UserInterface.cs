@@ -29,6 +29,13 @@ namespace Laba6_CauchyProblem
             Console.WriteLine("Численное решение Задачи Коши для обыкновенного дифференциального уравнения первого порядка\n");
             Console.ResetColor();
 
+            Console.WriteLine("\n--------------------------------------------------");
+            Console.WriteLine("Вариант 14");
+            Console.WriteLine("Функция: y'(x) = -y(x) + x / 2");
+            Console.WriteLine("Условие задачи Коши: y(0) = 1");
+            Console.WriteLine("Точное решение: y(x) = 1 / 2 * (x + 3 * e^(-x) - 1)");
+            Console.WriteLine("--------------------------------------------------\n");
+
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"N = {N}");
             Console.WriteLine($"шаг = {step}\n");
