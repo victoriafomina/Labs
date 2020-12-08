@@ -29,9 +29,15 @@ namespace Laba6_CauchyProblem
             Console.WriteLine("Численное решение Задачи Коши для обыкновенного дифференциального уравнения первого порядка\n");
             Console.ResetColor();
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"N = {N}");
+            Console.WriteLine($"шаг = {step}\n");
+            Console.ResetColor();
+
             PrintExactSolutions();
             PrintTaylor();
             PrintAdams();
+            PrintRungeKutta();
         }
 
         private void CalculateExactSolutions()
@@ -102,7 +108,29 @@ namespace Laba6_CauchyProblem
 
             Console.Write($"{Math.Abs(taylorsValues[taylorsValues.Count - 1].Item2 - exactSolutions[exactSolutions.Count - 1].Item2)} - ");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("абсолютная погрешность x_N");
+            Console.WriteLine("абсолютная погрешность x_N\n");
+            Console.ResetColor();
+        }
+
+        private void PrintRungeKutta()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Приближенное решение задачи Коши методом Рунге-Кутта 4-го порядка");
+            Console.ResetColor();
+            Console.WriteLine(" x | f(x)");
+
+            double currentPoint = xZero;
+            double currentValue = yZero;
+
+            for (var i = 1; i < N + 1; ++i)
+            {
+                currentValue = logic.RungeKuttaMethod(currentPoint, currentValue, step);
+                currentPoint += step;
+                Console.WriteLine($"{currentPoint} | {currentValue}");
+            }
+            Console.Write($"{Math.Abs(currentValue - exactSolutions[exactSolutions.Count - 1].Item2)} - ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("абсолютная погрешность x_N\n");
             Console.ResetColor();
         }
     }
