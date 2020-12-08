@@ -27,12 +27,12 @@ namespace Laba6_CauchyProblem
             fourthFinalDifferences = new List<double>();
         }
 
-        public void TaylorPolynomialValue(int currentX)
+        public double TaylorPolynomialValue(double currentX)
         {
             int highestDerivativeOrder = 4;
             double taylorPolynomialValue = 0;
             int factorial = 1;
-            int deviationBracket = 1;
+            double deviationBracket = 1;
 
             for (var i = 0; i <= highestDerivativeOrder; ++i)
             {
@@ -44,6 +44,8 @@ namespace Laba6_CauchyProblem
                 taylorPolynomialValue += function.DerivativeValue(i, x, y) * deviationBracket / factorial;
                 deviationBracket *= currentX - x;
             }
+
+            return taylorPolynomialValue;
         }
 
         public double EulersMethod(double previousX, double previousY, double step)
