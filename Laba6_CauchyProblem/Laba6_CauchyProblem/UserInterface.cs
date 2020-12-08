@@ -38,6 +38,9 @@ namespace Laba6_CauchyProblem
             PrintTaylor();
             PrintAdams();
             PrintRungeKutta();
+            PrintEulersMethod();
+            PrintEulersMethodI();
+            PrintEulersMethodII();
         }
 
         private void CalculateExactSolutions()
@@ -125,6 +128,72 @@ namespace Laba6_CauchyProblem
             for (var i = 1; i < N + 1; ++i)
             {
                 currentValue = logic.RungeKuttaMethod(currentPoint, currentValue, step);
+                currentPoint += step;
+                Console.WriteLine($"{currentPoint} | {currentValue}");
+            }
+            Console.Write($"{Math.Abs(currentValue - exactSolutions[exactSolutions.Count - 1].Item2)} - ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("абсолютная погрешность x_N\n");
+            Console.ResetColor();
+        }
+
+        private void PrintEulersMethod()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Приближенное решение задачи Коши методом Эйлера");
+            Console.ResetColor();
+            Console.WriteLine(" x | f(x)");
+
+            double currentPoint = xZero;
+            double currentValue = yZero;
+
+            for (var i = 1; i < N + 1; ++i)
+            {
+                currentValue = logic.EulersMethod(currentPoint, currentValue, step);
+                currentPoint += step;
+                Console.WriteLine($"{currentPoint} | {currentValue}");
+            }
+            Console.Write($"{Math.Abs(currentValue - exactSolutions[exactSolutions.Count - 1].Item2)} - ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("абсолютная погрешность x_N\n");
+            Console.ResetColor();
+        }
+
+        private void PrintEulersMethodI()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Приближенное решение задачи Коши методом Эйлера I");
+            Console.ResetColor();
+            Console.WriteLine(" x | f(x)");
+
+            double currentPoint = xZero;
+            double currentValue = yZero;
+
+            for (var i = 1; i < N + 1; ++i)
+            {
+                currentValue = logic.EulersMethodI(currentPoint, currentValue, step);
+                currentPoint += step;
+                Console.WriteLine($"{currentPoint} | {currentValue}");
+            }
+            Console.Write($"{Math.Abs(currentValue - exactSolutions[exactSolutions.Count - 1].Item2)} - ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("абсолютная погрешность x_N\n");
+            Console.ResetColor();
+        }
+
+        private void PrintEulersMethodII()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Приближенное решение задачи Коши методом Эйлера II");
+            Console.ResetColor();
+            Console.WriteLine(" x | f(x)");
+
+            double currentPoint = xZero;
+            double currentValue = yZero;
+
+            for (var i = 1; i < N + 1; ++i)
+            {
+                currentValue = logic.EulersMethodII(currentPoint, currentValue, step);
                 currentPoint += step;
                 Console.WriteLine($"{currentPoint} | {currentValue}");
             }
