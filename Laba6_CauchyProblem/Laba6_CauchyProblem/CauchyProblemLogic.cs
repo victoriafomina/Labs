@@ -98,22 +98,22 @@ namespace Laba6_CauchyProblem
 
             for (var i = 0; i < zeroFinalDifferences.Count - 1; ++i)
             {
-                firstFinalDifferences.Add(zeroFinalDifferences[i + 1] + zeroFinalDifferences[i]);
+                firstFinalDifferences.Add(zeroFinalDifferences[i + 1] - zeroFinalDifferences[i]);
             }
 
             for (var i = 0; i < firstFinalDifferences.Count - 1; ++i)
             {
-                secondFinalDifferences.Add(firstFinalDifferences[i + 1] + firstFinalDifferences[i]);
+                secondFinalDifferences.Add(firstFinalDifferences[i + 1] - firstFinalDifferences[i]);
             }
 
             for (var i = 0; i < secondFinalDifferences.Count - 1; ++i)
             {
-                thirdFinalDifferences.Add(secondFinalDifferences[i + 1] + secondFinalDifferences[i]);
+                thirdFinalDifferences.Add(secondFinalDifferences[i + 1] - secondFinalDifferences[i]);
             }
 
             for (var i = 0; i < thirdFinalDifferences.Count - 1; ++i)
             {
-                fourthFinalDifferences.Add(thirdFinalDifferences[i + 1] + thirdFinalDifferences[i]);
+                fourthFinalDifferences.Add(thirdFinalDifferences[i + 1] - thirdFinalDifferences[i]);
             }
         }
     }
