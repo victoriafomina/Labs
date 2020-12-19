@@ -13,7 +13,7 @@ namespace Laba2_interpolation_polinomial_Lagrange
 
         private static List<(double, double)> interpolationNodes = new List<(double, double)>();
 
-        private static IFunction function = new FunctionTest();
+        private static IFunction function = new MyFunction();
 
 
 

@@ -9,15 +9,15 @@ namespace Laba3_Newtons_Method
     {
         private List<(double, double)> interpolationNodes;
 
+        private List<List<((double, double), double)>> dividedDifferences;
+
         private double interpolationPoint;
 
         private int degreeOfPolynomial;
 
         private IFunction function;
 
-        private double lagrangePolynomialValue;
-
-        private List<List<double>> dividedDifferences;
+        private double newtonPolynomialValue;
 
         private bool sorted;
 
@@ -38,11 +38,11 @@ namespace Laba3_Newtons_Method
             sorted = false;
             isCalculated = false;
 
-            dividedDifferences = new List<List<double>>();
+            dividedDifferences = new List<List<((double, double), double)>>();
 
             for (var i = 0; i < interpolationNodes.Count - 1; ++i)
             {
-                dividedDifferences.Add(new List<double>());
+                dividedDifferences.Add(new List<((double, double), double)>());
             }
 
             CalculateDividedDifferences();
@@ -52,59 +52,58 @@ namespace Laba3_Newtons_Method
 
         public double Run()
         {
-            return -1; //NewtonPolynomialValue();
+            return NewtonPolynomialValue();
         }
-        /*
+        
         private double NewtonPolynomialValue()
         {
             double result = interpolationNodes[0].Item2;
+            double bracketsProduct = 1;
 
-            for (int i = 0; i < )
+            for (var i = 0; i < dividedDifferences.Count; ++i)
+            {
+                bracketsProduct *= interpolationPoint - interpolationNodes[i].Item1;
+                result += dividedDifferences[i][0].Item2 * bracketsProduct;
+            }
+
+            newtonPolynomialValue = result;
+            isCalculated = true;
+
+            return result;
         }
-        */
 
-        public void CalculateDividedDifferences()
+        private void CalculateDividedDifferences()
         {
             for (var i = 0; i < dividedDifferences.Count; ++i)
             {
-                for (var j = 0; j < dividedDifferences.Count - i; ++j)
+                if (i == 0)
                 {
-                    if (dividedDifferences[j].Count == 0)
+                    for (var j = 0; j < interpolationNodes.Count - 1; ++j)
                     {
-                        dividedDifferences[j].Add((interpolationNodes[i + 1].Item2 - interpolationNodes[i].Item2) /
-                                (interpolationNodes[i + 1].Item1 - interpolationNodes[i].Item1));
+                        dividedDifferences[i].Add(((interpolationNodes[j].Item1, interpolationNodes[j + 1].Item1), (interpolationNodes[j + 1].Item2 - interpolationNodes[j].Item2) /
+                                (interpolationNodes[j + 1].Item1 - interpolationNodes[j].Item1)));
                     }
-                    else if (j + 1 < dividedDifferences.Count)
+                }
+                else
+                {
+                    for (var j = 0; j < interpolationNodes.Count - i - 1; ++j)
                     {
-                        dividedDifferences[j].Add((dividedDifferences[j + 1][dividedDifferences.Count - 1] - dividedDifferences[j][dividedDifferences.Count - 1]) /
-                                (interpolationNodes[j + i + 1].Item1 - interpolationNodes[i].Item1));
+                        dividedDifferences[i].Add((((dividedDifferences[i - 1])[j].Item1.Item1, (dividedDifferences[i - 1])[j + 1].Item1.Item2), 
+                                (dividedDifferences[i - 1][j + 1].Item2 - dividedDifferences[i - 1][j].Item2) / (dividedDifferences[i - 1][j + 1].Item1.Item2 - dividedDifferences[i - 1][j].Item1.Item1)));
                     }
                 }
             }
 
+            /* Prints divided differences
             for (var i = 0; i < dividedDifferences.Count; ++i)
             {
-                for (var j = 0; j < dividedDifferences.Count - i - 1; ++j)
+                for (var j = 0; j < dividedDifferences[i].Count; ++j)
                 {
-                    Console.Write($"{dividedDifferences[i][j]},  ");
+                    Console.WriteLine($"({dividedDifferences[i][j].Item1.Item1}, {dividedDifferences[i][j].Item1.Item2}), {dividedDifferences[i][j].Item2}");
                 }
                 Console.WriteLine();
             }
-        }
-
-        private double ParenthesesProduct(int index, double point)
-        {
-            double result = 1;
-
-            for (var i = 0; i < degreeOfPolynomial + 1; ++i)
-            {
-                if (i != index)
-                {
-                    result *= (point - interpolationNodes[i].Item1);
-                }
-            }
-
-            return result;
+            */
         }
 
         public void PrintSortedTable()
@@ -128,7 +127,7 @@ namespace Laba3_Newtons_Method
                         " не были произведены!!!");
             }
 
-            return Math.Abs(lagrangePolynomialValue - function.Value(interpolationPoint));
+            return Math.Abs(newtonPolynomialValue - function.Value(interpolationPoint));
         }
 
         private void Sort()

@@ -7,10 +7,9 @@ namespace Laba3_Newtons_Method
     {
         public static void Main(string[] args)
         {
-            List<(double, double)> list = new List<(double, double)> { (100, 2), (101, Math.Log10(101)),
-                    (102, Math.Log10(102)), (103, Math.Log10(103)), (104, Math.Log10(104))};
-            AlgebraicInterpolation a = new AlgebraicInterpolation(list, 101.1, 4, new MyFunction());
-            a.CalculateDividedDifferences();
+            // var al = new AlgebraicInterpolation(new List<(double, double)>() { (-1, 9), (1, 3), (2, 3), (3, 5) }, 1, 3, new MyFunction());
+
+            UserInterface.Run();
         }
     }
 }
