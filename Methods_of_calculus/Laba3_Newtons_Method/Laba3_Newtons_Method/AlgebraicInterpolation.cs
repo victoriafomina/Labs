@@ -86,6 +86,7 @@ namespace Laba3_Newtons_Method
                 }
                 else
                 {
+                    // Надо же не по всем узлам строить, а по degreeOfPolinomial + 1 подходящему
                     for (var j = 0; j < interpolationNodes.Count - i - 1; ++j)
                     {
                         dividedDifferences[i].Add((((dividedDifferences[i - 1])[j].Item1.Item1, (dividedDifferences[i - 1])[j + 1].Item1.Item2), 
