@@ -40,7 +40,7 @@ namespace Laba3_Newtons_Method
 
             dividedDifferences = new List<List<((double, double), double)>>();
 
-            for (var i = 0; i < interpolationNodes.Count - 1; ++i)
+            for (var i = 0; i < degreeOfPolynomial; ++i)
             {
                 dividedDifferences.Add(new List<((double, double), double)>());
             }
@@ -78,7 +78,7 @@ namespace Laba3_Newtons_Method
             {
                 if (i == 0)
                 {
-                    for (var j = 0; j < interpolationNodes.Count - 1; ++j)
+                    for (var j = 0; j < degreeOfPolynomial; ++j)
                     {
                         dividedDifferences[i].Add(((interpolationNodes[j].Item1, interpolationNodes[j + 1].Item1), (interpolationNodes[j + 1].Item2 - interpolationNodes[j].Item2) /
                                 (interpolationNodes[j + 1].Item1 - interpolationNodes[j].Item1)));
@@ -87,7 +87,7 @@ namespace Laba3_Newtons_Method
                 else
                 {
                     // Надо же не по всем узлам строить, а по degreeOfPolinomial + 1 подходящему
-                    for (var j = 0; j < interpolationNodes.Count - i - 1; ++j)
+                    for (var j = 0; j < degreeOfPolynomial - i; ++j)
                     {
                         dividedDifferences[i].Add((((dividedDifferences[i - 1])[j].Item1.Item1, (dividedDifferences[i - 1])[j + 1].Item1.Item2), 
                                 (dividedDifferences[i - 1][j + 1].Item2 - dividedDifferences[i - 1][j].Item2) / (dividedDifferences[i - 1][j + 1].Item1.Item2 - dividedDifferences[i - 1][j].Item1.Item1)));
@@ -95,7 +95,7 @@ namespace Laba3_Newtons_Method
                 }
             }
 
-            /* Prints divided differences
+            // Prints divided differences
             for (var i = 0; i < dividedDifferences.Count; ++i)
             {
                 for (var j = 0; j < dividedDifferences[i].Count; ++j)
@@ -103,8 +103,7 @@ namespace Laba3_Newtons_Method
                     Console.WriteLine($"({dividedDifferences[i][j].Item1.Item1}, {dividedDifferences[i][j].Item1.Item2}), {dividedDifferences[i][j].Item2}");
                 }
                 Console.WriteLine();
-            }
-            */
+            }            
         }
 
         public void PrintSortedTable()
