@@ -10,6 +10,7 @@ namespace Laba5_ApproxCalcOfIntegralsQFHighestDegree
         private double rightBorder = 1;
         private ApproximateCalculationLogic logic = new ApproximateCalculationLogic(new Function(), new WeightFunction(), new MehlerFunction());
         private IFunction antiderivative = new Antiderivative();
+        private int N = 2;
 
         public void Run()
         {
@@ -24,6 +25,7 @@ namespace Laba5_ApproxCalcOfIntegralsQFHighestDegree
                 Console.WriteLine($"Функция: {new Function()}");
                 Console.WriteLine($"Весовая функция: {new WeightFunction()}");
                 Console.WriteLine($"Отрезок: [{leftBorder}; {rightBorder}]\n");
+                Console.WriteLine($"Количество узлов: {N}");
                 Console.Write("Введите число промежутков деления: ");
                 int parts = int.Parse(Console.ReadLine());
                 double approximateValueGaussCompound = logic.GaussCompound(parts, leftBorder, rightBorder);
@@ -39,6 +41,7 @@ namespace Laba5_ApproxCalcOfIntegralsQFHighestDegree
                 Console.WriteLine($"Весовая функция: {new WeightFunction()}");
                 Console.WriteLine($"Отрезок: [{leftBorder}; {rightBorder}]\n");
                 double approximateValueQFTypeGauss = logic.GaussianQuadratureFormula(leftBorder, rightBorder);
+                Console.WriteLine($"Количество узлов: {N}");
                 Console.WriteLine($"\nПриближенное значение интеграла: {approximateValueQFTypeGauss}\n");
                 double exactValueQFTypeGauss = antiderivative.Value(rightBorder) - antiderivative.Value(leftBorder);
                 logic.PrintMoments();
