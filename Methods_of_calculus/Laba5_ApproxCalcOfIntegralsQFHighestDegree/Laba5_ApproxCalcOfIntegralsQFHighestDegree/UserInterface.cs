@@ -26,11 +26,26 @@ namespace Laba5_ApproxCalcOfIntegralsQFHighestDegree
                 Console.WriteLine($"Отрезок: [{leftBorder}; {rightBorder}]\n");
                 Console.Write("Введите число промежутков деления: ");
                 int parts = int.Parse(Console.ReadLine());
-                double approximateValue = logic.GaussCompound(parts, leftBorder, rightBorder);
-                Console.WriteLine($"\nПриближенное значение интеграла: {approximateValue}\n");
-                double exactValue = antiderivative.Value(rightBorder) - antiderivative.Value(leftBorder);
-                Console.WriteLine($"Точное значение интеграла: {exactValue}\n");
-                Console.WriteLine($"Абсолютная погрешность: {Math.Abs(exactValue - approximateValue)}");
+                double approximateValueGaussCompound = logic.GaussCompound(parts, leftBorder, rightBorder);
+                Console.WriteLine($"\nПриближенное значение интеграла: {approximateValueGaussCompound}\n");
+                double exactValueGaussCompound = antiderivative.Value(rightBorder) - antiderivative.Value(leftBorder);
+                Console.WriteLine($"Точное значение интеграла: {exactValueGaussCompound}\n");
+                Console.WriteLine($"Абсолютная погрешность: {Math.Abs(exactValueGaussCompound - approximateValueGaussCompound)}");
+
+                Console.WriteLine("--------------------------------------------------------");
+
+                Console.WriteLine("Вычислим при помощи КФ типа Гаусса с 2-мя узлами:\n");
+                Console.WriteLine($"Функция: {new Function()}");
+                Console.WriteLine($"Весовая функция: {new WeightFunction()}");
+                Console.WriteLine($"Отрезок: [{leftBorder}; {rightBorder}]\n");
+                double approximateValueQFTypeGauss = logic.GaussianQuadratureFormula(leftBorder, rightBorder);
+                Console.WriteLine($"\nПриближенное значение интеграла: {approximateValueQFTypeGauss}\n");
+                double exactValueQFTypeGauss = antiderivative.Value(rightBorder) - antiderivative.Value(leftBorder);
+                logic.PrintMoments();
+                Console.WriteLine();
+                logic.PrintQuadratureFormulasCoefficients();
+                Console.WriteLine($"\nТочное значение интеграла: {exactValueQFTypeGauss}\n");
+                Console.WriteLine($"Абсолютная погрешность: {Math.Abs(exactValueQFTypeGauss - approximateValueQFTypeGauss)}");
 
                 Console.WriteLine("--------------------------------------------------------");
 
