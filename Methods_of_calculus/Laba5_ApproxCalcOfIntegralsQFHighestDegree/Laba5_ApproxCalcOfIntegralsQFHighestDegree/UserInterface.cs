@@ -55,7 +55,7 @@ namespace Laba5_ApproxCalcOfIntegralsQFHighestDegree
                     case 1:
                         break;
                     case 2:
-                        ChangeBorders();
+                        SetBorders();
                         break;
                 }
 
@@ -63,9 +63,27 @@ namespace Laba5_ApproxCalcOfIntegralsQFHighestDegree
 
         }
 
-        private void ChangeBorders()
+        private void SetBorders()
         {
+            Console.Write("\nВведите левую границу отрезка: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            leftBorder = int.Parse(Console.ReadLine());
+            Console.ResetColor();
 
+            Console.Write("\nВведите правую границу отрезка: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            rightBorder = int.Parse(Console.ReadLine());
+            while (rightBorder <= leftBorder)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("\nЗначение правой границы отрезка должно быть больше значения левой границы!\n");
+                Console.ResetColor();
+                Console.Write("\nВведите правую границу отрезка: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                rightBorder = int.Parse(Console.ReadLine());
+            }
+            Console.WriteLine($"\n[{leftBorder}, {rightBorder}]\n");
+            Console.ResetColor();
         }
     }
 }
