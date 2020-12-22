@@ -42,11 +42,13 @@ namespace Laba5_ApproxCalcOfIntegralsQFHighestDegree
                 Console.WriteLine($"Отрезок: [{leftBorder}; {rightBorder}]\n");
                 double approximateValueQFTypeGauss = logic.GaussianQuadratureFormula(leftBorder, rightBorder);
                 Console.WriteLine($"Количество узлов: {N}");
-                Console.WriteLine($"\nПриближенное значение интеграла: {approximateValueQFTypeGauss}\n");
                 double exactValueQFTypeGauss = antiderivative.Value(rightBorder) - antiderivative.Value(leftBorder);
                 logic.PrintMoments();
                 Console.WriteLine();
-                logic.PrintQuadratureFormulasCoefficients();
+                logic.PrintNodes(leftBorder, rightBorder);
+                Console.WriteLine();
+                logic.PrintQuadratureFormulasCoefficients(leftBorder, rightBorder);
+                Console.WriteLine($"\nПриближенное значение интеграла: {approximateValueQFTypeGauss}\n");
                 Console.WriteLine($"\nТочное значение интеграла: {exactValueQFTypeGauss}\n");
                 Console.WriteLine($"Абсолютная погрешность: {Math.Abs(exactValueQFTypeGauss - approximateValueQFTypeGauss)}");
 
@@ -58,7 +60,12 @@ namespace Laba5_ApproxCalcOfIntegralsQFHighestDegree
                 Console.WriteLine($"Отрезок: [-1; 1]\n");
                 Console.Write("Введите число узлов: ");
                 int numberOfNodes = int.Parse(Console.ReadLine());
-                Console.WriteLine($"\nПриближенное значение интеграла: {logic.MehlersFormula(numberOfNodes)}");
+                var mehlerApproximateValue = logic.MehlersFormula(numberOfNodes);
+                Console.WriteLine($"\nПриближенное значение интеграла: {mehlerApproximateValue}");
+                var mehlerExactIntegralFunction = new MehlerAntiderivativeFunction();
+                var exactValueIntegral = mehlerExactIntegralFunction.Value(1) - mehlerExactIntegralFunction.Value(-1);
+                Console.WriteLine($"Точное значение интеграла: {exactValueIntegral}");
+                Console.WriteLine($"Абсолютная погрешность: {Math.Abs(exactValueIntegral - mehlerApproximateValue)}");
 
                 Console.WriteLine("--------------------------------------------------------");
                 Console.WriteLine("0 - выйти");
@@ -76,7 +83,6 @@ namespace Laba5_ApproxCalcOfIntegralsQFHighestDegree
                         SetBorders();
                         break;
                 }
-
             }
 
         }

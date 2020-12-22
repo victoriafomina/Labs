@@ -12,6 +12,8 @@ namespace Laba5_ApproxCalcOfIntegralsQFHighestDegree
         private double[] moments;
         private double A1;
         private double A2;
+        private double x1;
+        private double x2;
 
         public ApproximateCalculationLogic(IFunction function, IFunction weightFunction, IFunction functionMehler)
         {
@@ -45,8 +47,8 @@ namespace Laba5_ApproxCalcOfIntegralsQFHighestDegree
             double a2 = (moments[2] * moments[2] - moments[3] * moments[1]) / (moments[1] * moments[1] - moments[2] * moments[0]);
 
             // узлы
-            double x1 = (-a1 + Math.Sqrt(a1 * a1 - 4 * a2)) / 2;
-            double x2 = (-a1 - Math.Sqrt(a1 * a1 - 4 * a2)) / 2;
+            x1 = (-a1 + Math.Sqrt(a1 * a1 - 4 * a2)) / 2;
+            x2 = (-a1 - Math.Sqrt(a1 * a1 - 4 * a2)) / 2;
 
             // коэффициенты квадратурной формулы
             A1 = 1 / (x1 - x2) * (moments[1] - x2 * moments[0]);
@@ -55,11 +57,35 @@ namespace Laba5_ApproxCalcOfIntegralsQFHighestDegree
             return A1 * Math.Sin(x1) + A2 * Math.Sin(x2);
         }
 
-        public void PrintQuadratureFormulasCoefficients()
+        public void PrintQuadratureFormulasCoefficients(double leftBorder, double rightBorder)
         {
             Console.WriteLine("Коэффициенты квадратурной формулы:");
             Console.WriteLine($"A1 = {A1}");
-            Console.WriteLine($"A2 = {A2}");
+            Console.WriteLine($"A2 = {A2}\n");
+
+            if (A1 > 0 && A2 > 0 || A1 < 0 && A2 < 0)
+            {
+                Console.WriteLine("Коэффициенты квадратурной формулы одного знака");
+            }
+            else
+            {
+                Console.WriteLine("Коэффициенты квадратурной формулы некорректны!!!");
+            }
+        }
+
+        public void PrintNodes(double leftBorder, double rightBorder)
+        {
+            Console.WriteLine("Узлы:");
+            Console.WriteLine($"x1 = {x1}");
+            Console.WriteLine($"x2 = {x2}");
+            if (x1 >= leftBorder && x1 <= rightBorder && x2 >= leftBorder && x2 <= rightBorder)
+            {
+                Console.WriteLine("Узлы лежат внутри отрезка");
+            }
+            else
+            {
+                Console.WriteLine("Узлы не лежат внутри отрезка! Некорректно!!!");
+            }
         }
 
         private void CalculateMoments(double leftBorder, double rightBorder)
@@ -109,7 +135,7 @@ namespace Laba5_ApproxCalcOfIntegralsQFHighestDegree
 
             for (var i = 0; i < numberOfNodes; ++i)
             {
-                result += functionMehler.Value(Math.Cos((2 * i + 1) / (2 * numberOfNodes) * Math.PI));
+                result += functionMehler.Value(Math.Cos((2 * i + 1.0) / (2 * numberOfNodes) * Math.PI));
                 Console.WriteLine($"Узел {i} КФ Мелера: {Math.Cos((2 * i + 1.0) / (2 * numberOfNodes) * Math.PI)}");
                 Console.WriteLine($"Коэффициент {i} КФ Мелера: {Math.PI / numberOfNodes}\n");
             }
