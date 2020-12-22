@@ -26,7 +26,7 @@ namespace Laba3_ReverseInterpolation
             }
         }
 
-        public double ReverseFunctionWay(double value, double leftBorder, double rightBorder, int parts, int degreeOfPolynomial)
+        public double ReverseFunctionMethod(double value, double leftBorder, double rightBorder, int parts, int degreeOfPolynomial)
         {
             CreateTable(leftBorder, rightBorder, parts);
             PrintTable();
@@ -35,15 +35,16 @@ namespace Laba3_ReverseInterpolation
             return interpolation.Run();
         }
 
-        public void PrintTable()
+        private void PrintTable()
         {
-            Console.WriteLine("  x  |  f(x)");
+            Console.WriteLine("\n  x  |  f(x)");
             Console.WriteLine("-------------");
 
             for (var i = 0; i < nodes.Count; ++i)
             {
                 Console.WriteLine($"{nodes[i].Item1} | {nodes[i].Item2}");
             }
+            Console.WriteLine();
         }
     }
 }
