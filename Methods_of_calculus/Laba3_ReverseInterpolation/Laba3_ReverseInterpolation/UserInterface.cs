@@ -38,6 +38,16 @@ namespace Laba3_ReverseInterpolation
                     Console.ResetColor();
                 }
                 Console.Write($"\nПриближенное решение уравнения: {logic.ReverseFunctionMethod(value, leftBorder, rightBorder, parts - 1, degreeOfPolynomial)}");
+                Console.Write($"\nМодуль невязки: {logic.ReverseInterpolationDeviation()}");
+                Console.WriteLine("-----------------------------------------------------------------------------------------");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("2 способ решения (через алгебраическую интерполяцию )\n");
+                Console.ResetColor();
+                Console.Write("Введите порядок погрешности (целое натуральное число): ");
+                int order = int.Parse(Console.ReadLine());
+                double accuracy = 1 / Math.Pow(10, -order);
+                Console.Write($"\nПриближенное решение уравнения: {logic.SolveUsingBisection(value, leftBorder, rightBorder, parts, degreeOfPolynomial, accuracy)}");
+                Console.ResetColor();
                 Console.WriteLine("\n-------------------------------------");
                 Console.WriteLine("0 - выход");
                 Console.WriteLine("1 - запустить заново");

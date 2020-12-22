@@ -8,6 +8,9 @@ namespace Laba3_ReverseInterpolation
     {
         private List<(double, double)> nodes = new List<(double, double)>();
         private IFunction function;
+        private double value;
+        private double firstMethodResult;
+        private Dictionary<int, (double, double)> signChangeIntervals = new Dictionary<int, (double, double)>();
 
         public ReverseInterpolationLogic(IFunction function)
         {
@@ -30,9 +33,12 @@ namespace Laba3_ReverseInterpolation
         {
             CreateTable(leftBorder, rightBorder, parts);
             PrintTable();
+            this.value = value;
             var interpolation = new AlgebraicInterpolation(nodes, value, degreeOfPolynomial, new MyFunction());
 
-            return interpolation.Run();
+            firstMethodResult = interpolation.Run();
+
+            return firstMethodResult;
         }
 
         private void PrintTable()
@@ -45,6 +51,50 @@ namespace Laba3_ReverseInterpolation
                 Console.WriteLine($"{nodes[i].Item1} | {nodes[i].Item2}");
             }
             Console.WriteLine();
+        }
+
+        public double ReverseInterpolationDeviation() => Math.Abs(function.Value(firstMethodResult) - value);
+
+        public double SolveUsingBisection(double value, double leftBorder, double rightBorder, int parts, int degreeOfPolynomial, double accuracy)
+        {
+            CreateTable(leftBorder, rightBorder, parts);
+            SeparationOfRoots(leftBorder, rightBorder, parts, function);
+            var bisection = new BisectionMethod(new BisectionInterpolarFunction(nodes, degreeOfPolynomial), value, leftBorder, rightBorder,
+                    (rightBorder - leftBorder) / parts, accuracy);
+
+            return bisection.ApproximateResult;
+        }
+
+        /// <summary>
+        /// Метод разделения корней уравнения.
+        /// </summary>
+        private void SeparationOfRoots(double leftBorder, double rightBorder, int numberOfParts, IFunction function)
+        {
+            double step = (leftBorder + rightBorder) / numberOfParts;
+            double currentLeftPoint = leftBorder;
+            double currentRightPoint = leftBorder + step;
+            double currentLeftPointValue = function.Value(currentLeftPoint);
+            int countSignChangeIntervals = 0;
+            Console.ForegroundColor = ConsoleColor.Cyan;
+
+            while (currentRightPoint <= rightBorder)
+            {
+                double currentRightPointValue = function.Value(currentRightPoint);
+
+                if (currentLeftPointValue * currentRightPointValue <= 0)
+                {
+                    Console.WriteLine($"[{currentLeftPoint}, {currentRightPoint}]");
+
+                    signChangeIntervals.Add(countSignChangeIntervals, (currentLeftPoint, currentRightPoint));
+                    ++countSignChangeIntervals;
+                }
+
+                currentLeftPoint = currentRightPoint;
+                currentRightPoint += step;
+                currentLeftPointValue = currentRightPointValue;
+            }
+
+            Console.WriteLine($"Количество отрезков смены знака функции: {countSignChangeIntervals}\n");
         }
     }
 }
