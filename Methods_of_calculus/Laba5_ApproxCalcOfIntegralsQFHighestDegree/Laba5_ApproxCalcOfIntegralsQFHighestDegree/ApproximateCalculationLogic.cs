@@ -80,7 +80,7 @@ namespace Laba5_ApproxCalcOfIntegralsQFHighestDegree
             Console.WriteLine($"x2 = {x2}");
             if (x1 >= leftBorder && x1 <= rightBorder && x2 >= leftBorder && x2 <= rightBorder)
             {
-                Console.WriteLine("Узлы лежат внутри отрезка");
+                Console.WriteLine("\nУзлы лежат внутри отрезка");
             }
             else
             {
