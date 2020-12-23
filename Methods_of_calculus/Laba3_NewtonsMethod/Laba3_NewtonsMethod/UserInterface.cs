@@ -69,6 +69,8 @@ namespace Laba3_NewtonsMethod
                         break;
                     case 3:
                         SetBorders();
+                        SetInterpolationNodes();
+                        PrintAllNodes();
                         break;
                     case 4:
                         SetBorders();
@@ -95,6 +97,7 @@ namespace Laba3_NewtonsMethod
             Console.Write("\nВведите правую границу отрезка: ");
             Console.ForegroundColor = ConsoleColor.Yellow;
             rightBorder = double.Parse(Console.ReadLine());
+
             while (rightBorder <= leftBorder)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
