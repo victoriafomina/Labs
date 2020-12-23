@@ -138,12 +138,12 @@ namespace Laba2_interpolation_polinomial_Lagrange
         {
             Console.Write("\nВведите левую границу отрезка: ");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            leftBorder = int.Parse(Console.ReadLine());
+            leftBorder = double.Parse(Console.ReadLine());
             Console.ResetColor();
 
             Console.Write("\nВведите правую границу отрезка: ");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            rightBorder = int.Parse(Console.ReadLine());
+            rightBorder = double.Parse(Console.ReadLine());
             while (rightBorder <= leftBorder)
             {
                 Console.ForegroundColor = ConsoleColor.Red;

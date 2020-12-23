@@ -51,11 +51,6 @@ namespace Laba2_interpolation_polinomial_Lagrange
             return LagrangePolynomialValue();
         }
 
-        private void CalculateDividedDifferences()
-        {
-
-        }
-
         private double LagrangePolynomialValue()
         {
             lagrangePolynomialValue = 0;
