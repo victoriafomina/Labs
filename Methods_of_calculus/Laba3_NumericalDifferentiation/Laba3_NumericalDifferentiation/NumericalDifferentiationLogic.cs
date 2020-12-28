@@ -24,6 +24,8 @@ namespace Laba3_NumericalDifferentiation
             secondNumericalDerivatives = new List<(double, double)>();
             secondNumericalDerivativesDeviations = new List<(double, double)>();
             this.function = function;
+            this.firstDerivative = firstDerivative;
+            this.secondDerivative = secondDerivative;
         }
 
         public void CreateTable(double leftBorder, double step, int numberOfPoints)
@@ -45,6 +47,8 @@ namespace Laba3_NumericalDifferentiation
             {
                 Console.WriteLine($"{i + 1}) {nodes[i].Item1} | {nodes[i].Item2}");
             }
+
+            Console.WriteLine();
         }
 
         public void Run()
@@ -70,6 +74,8 @@ namespace Laba3_NumericalDifferentiation
                             $"{firstNumericalDerivativesDeviations[i].Item2} |  {secondNumericalDerivatives[i].Item2}  | {secondNumericalDerivativesDeviations[i].Item2}");
                 }
             }
+
+            Console.WriteLine();
         }
 
         private void CalculateNumericalDerivatives()
@@ -97,7 +103,7 @@ namespace Laba3_NumericalDifferentiation
 
         private void CalculateSecondNumericalDerivativesDeviations()
         {
-            secondNumericalDerivatives.Clear();
+            secondNumericalDerivativesDeviations.Clear();
             secondNumericalDerivativesDeviations.Add((-1, -1));
 
             for (var i = 1; i < nodes.Count - 1; ++i)
