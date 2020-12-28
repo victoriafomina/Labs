@@ -69,7 +69,19 @@ namespace Laba3_ReverseInterpolation
             Console.WriteLine();
         }
 
-        public double ReverseInterpolationDeviation() => Math.Abs(function.Value(firstMethodResult) - value);
+        public double FirstMethodDeviation() => Math.Abs(function.Value(firstMethodResult) - value);
+
+        public List<double> SecondMethodDeviations()
+        {
+            var deviations = new List<double>();
+
+            for (var i = 0; i < secondMethodResult.Count; ++i)
+            {
+                deviations.Add(Math.Abs(function.Value(secondMethodResult[i]) - value));
+            }
+
+            return deviations;
+        }
 
         /// <summary>
         /// Метод разделения корней уравнения.

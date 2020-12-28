@@ -87,7 +87,7 @@ namespace Laba3_ReverseInterpolation
             }
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Узлы, по которым строится интерполяционный полином:");
+            Console.WriteLine("\nУзлы, по которым строится интерполяционный полином:");
             Utils.PrintTable(interpolationNodes, degreeOfPolynomial);
             Console.WriteLine();
         }

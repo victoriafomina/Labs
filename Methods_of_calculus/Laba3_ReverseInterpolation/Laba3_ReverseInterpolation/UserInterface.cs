@@ -42,7 +42,7 @@ namespace Laba3_ReverseInterpolation
                 }
                   
                 Console.Write($"\nПриближенное решение уравнения: {logic.ReverseFunctionMethod(value, leftBorder, rightBorder, parts, degreeOfPolynomial)}");
-                Console.Write($"\nМодуль невязки: {logic.ReverseInterpolationDeviation()}");
+                Console.Write($"\nМодуль невязки: {logic.FirstMethodDeviation()}");
                 Console.WriteLine("\n----------------------------------------------------------------------------------");
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -57,10 +57,12 @@ namespace Laba3_ReverseInterpolation
                 double accuracy = Math.Pow(10, -order);
 
                 var result = logic.ReverseAlgebraicInterpolationMethod(value, leftBorder, rightBorder, parts, degreeOfPolynomial, accuracy);
+                var deviations = logic.SecondMethodDeviations();
 
                 for (var i = 0; i < result.Count; ++i)
                 {
-                    Console.Write($"Приближенное решение уравнения: {result[i]}");
+                    Console.WriteLine($"Приближенное решение уравнения: {result[i]}");
+                    Console.WriteLine($"Модуль невязки: {deviations[i]}\n");
                 }
                 Console.ResetColor();
                 Console.WriteLine("\n-------------------------------------");                
