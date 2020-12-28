@@ -11,10 +11,12 @@ namespace Laba3_ReverseInterpolation
         private List<(double, double)> interpolationNodes;
         private int degreeOfPolynomial;
         private IFunction function;
+        private bool printTable;
 
         public InterpolarFunction(double value)
         {
             this.value = value;
+            printTable = true;
         }
 
         public void SetValue(double value) => this.value = value;
@@ -29,6 +31,12 @@ namespace Laba3_ReverseInterpolation
         {
             // а функция передается для вычисления погрешности в старой лабе, что уже довольно костыльно
             polynomial = new AlgebraicInterpolation(interpolationNodes, x, degreeOfPolynomial, function);
+
+            if (printTable)
+            {
+                printTable = false;
+                polynomial.PrintSortedTable();
+            }
 
             return polynomial.Run() - value;
         }

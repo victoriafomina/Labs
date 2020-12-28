@@ -30,7 +30,7 @@ namespace Laba3_ReverseInterpolation
             CreateTable(leftBorder, rightBorder, parts);
             this.value = value;
             var interpolation = new AlgebraicInterpolation(nodes, value, degreeOfPolynomial, new MyFunction());
-
+            interpolation.PrintSortedTable();
             firstMethodResult = interpolation.Run();
 
             return firstMethodResult;
@@ -64,7 +64,7 @@ namespace Laba3_ReverseInterpolation
 
             for (var i = 0; i < nodes.Count; ++i)
             {
-                Console.WriteLine($"{nodes[i].Item2} | {nodes[i].Item1}");
+                Console.WriteLine($"{i + 1}) {nodes[i].Item2} | {nodes[i].Item1}");
             }
             Console.WriteLine();
         }

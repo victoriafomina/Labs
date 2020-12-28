@@ -41,8 +41,6 @@ namespace Laba3_ReverseInterpolation
             {
                 dividedDifferences[i] = new List<double>();
             }
-
-            PrintSortedTable();
         }
 
         public double Run()
@@ -91,6 +89,7 @@ namespace Laba3_ReverseInterpolation
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Узлы, по которым строится интерполяционный полином:");
             Utils.PrintTable(interpolationNodes, degreeOfPolynomial);
+            Console.WriteLine();
         }
 
         public double MeasurementError()
