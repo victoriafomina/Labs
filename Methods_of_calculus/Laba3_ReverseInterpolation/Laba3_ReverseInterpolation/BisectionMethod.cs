@@ -9,14 +9,9 @@ namespace Laba3_ReverseInterpolation
     /// </summary>
     public sealed class BisectionMethod : SolvingMethod
     {
-        private double value;
-
-        public BisectionMethod(IFunction function, double value, double leftBorder, double rightBorder,
-                double step, double accuracy) : base(function,
-                leftBorder, rightBorder, step, accuracy)
-        {
-            this.value = value;
-        }
+        public BisectionMethod(IFunction function, double leftBorder, double rightBorder, 
+                double accuracy) : base(function, leftBorder, rightBorder, accuracy)
+        { }
 
         /// <summary>
         /// Метод, запускающий процедуру решения нелинейного уравнения методом половинного деления.
@@ -30,7 +25,7 @@ namespace Laba3_ReverseInterpolation
             {
                 double midpoint = (leftBorder + rightBorder) / 2;
 
-                if ((function.Value(leftBorder) - value) * (function.Value(midpoint) - value) <= 0)
+                if (function.Value(leftBorder) * function.Value(midpoint) <= 0)
                 {
                     rightBorder = midpoint;
                 }

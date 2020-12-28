@@ -21,13 +21,11 @@ namespace Laba3_ReverseInterpolation
         protected double approximateResult;
         protected double firstApproximation;
 
-        public SolvingMethod(IFunction function, double leftBorder, double rightBorder, double step,
-                double accuracy)
+        public SolvingMethod(IFunction function, double leftBorder, double rightBorder, double accuracy)
         {
             this.function = function;
             this.leftBorder = leftBorder;
             this.rightBorder = rightBorder;
-            this.step = step;
             this.accuracy = accuracy;
         }
 

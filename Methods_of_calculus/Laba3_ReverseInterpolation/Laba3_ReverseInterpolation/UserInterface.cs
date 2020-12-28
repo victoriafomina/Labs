@@ -32,6 +32,7 @@ namespace Laba3_ReverseInterpolation
                 Console.Write($"Введите полиномом какой степени будем интерполировать (> 0 и  < {parts}): ");
                 int degreeOfPolynomial = int.Parse(Console.ReadLine());
                 Console.WriteLine();
+
                 while (degreeOfPolynomial >= parts || degreeOfPolynomial <= 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -39,39 +40,45 @@ namespace Laba3_ReverseInterpolation
                     degreeOfPolynomial = int.Parse(Console.ReadLine());
                     Console.ResetColor();
                 }
+                  
                 Console.Write($"\nПриближенное решение уравнения: {logic.ReverseFunctionMethod(value, leftBorder, rightBorder, parts - 1, degreeOfPolynomial)}");
                 Console.Write($"\nМодуль невязки: {logic.ReverseInterpolationDeviation()}");
                 Console.WriteLine("\n----------------------------------------------------------------------------------");
 
-                //
-                //Console.ForegroundColor = ConsoleColor.Yellow;
-                //Console.WriteLine("2 способ решения (через алгебраическую интерполяцию )\n");
-                //Console.ResetColor();
-                //Console.Write("Введите порядок погрешности (целое натуральное число): ");
-                //int order = int.Parse(Console.ReadLine());
-                //double accuracy = 1 / Math.Pow(10, -order);
-                //Console.Write($"\nПриближенное решение уравнения: {logic.SolveUsingBisection(value, leftBorder, rightBorder, parts, degreeOfPolynomial, accuracy)}");
-                //Console.ResetColor();
-                //Console.WriteLine("\n-------------------------------------");
-                //
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("2 способ решения (через алгебраическую интерполяцию )\n");
+                Console.ResetColor();
+                // тут бы проверку на корректность введенных данных
+                Console.Write("Введите порядок погрешности (целое натуральное число): ");
+                int order = int.Parse(Console.ReadLine());
+                double accuracy = 1 / Math.Pow(10, -order);
+                Console.Write($"\nПриближенное решение уравнения: " +
+                        $"{logic.ReverseAlgebraicInterpolationMethod(value, leftBorder, rightBorder, parts, degreeOfPolynomial, accuracy)[0]}");
+                Console.ResetColor();
+                Console.WriteLine("\n-------------------------------------");                
 
-                Console.WriteLine("0 - выход");
-                Console.WriteLine("1 - запустить заново");
-                Console.WriteLine("2 - изменить границы отрезка");
-                int number = int.Parse(Console.ReadLine());
-
-                switch (number)
-                {
-                    case 0:
-                        return;
-                    case 1:
-                        break;
-                    case 2:
-                        SetBorders();
-                        break;
-                }
+                Menu();
             }
             
+        }
+
+        private void Menu()
+        {
+            Console.WriteLine("0 - выход");
+            Console.WriteLine("1 - запустить заново");
+            Console.WriteLine("2 - изменить границы отрезка");
+            int number = int.Parse(Console.ReadLine());
+
+            switch (number)
+            {
+                case 0:
+                    return;
+                case 1:
+                    break;
+                case 2:
+                    SetBorders();
+                    break;
+            }
         }
 
         private void SetBorders()
@@ -84,6 +91,7 @@ namespace Laba3_ReverseInterpolation
             Console.Write("Введите правую границу отрезка: ");
             Console.ForegroundColor = ConsoleColor.Yellow;
             rightBorder = double.Parse(Console.ReadLine());
+
             while (rightBorder <= leftBorder)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -93,6 +101,7 @@ namespace Laba3_ReverseInterpolation
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 rightBorder = int.Parse(Console.ReadLine());
             }
+
             Console.WriteLine($"\n[{leftBorder}, {rightBorder}]\n");
             Console.ResetColor();
         }
