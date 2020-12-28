@@ -46,6 +46,7 @@ namespace Laba3_ReverseInterpolation
             interpolarFunction.SetDegreeOfPolynomial(degreeOfPolynomial);
             interpolarFunction.SetInterpolationNodes(interpolationNodes);
             SeparationOfRoots(leftBorder, rightBorder, parts);
+            secondMethodResult.Clear();
 
             for (var i = 0; i < signChangeIntervals.Count; ++i)
             {
